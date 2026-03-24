@@ -1,11 +1,11 @@
 import { Link, useLocation } from "react-router";
-import { Map, Bike, Home, BarChart2 } from "lucide-react";
+import { Home, Sprout, Leaf, Wind } from "lucide-react";
 
 const NAV_ITEMS = [
   { to: "/", label: "Home", icon: Home },
-  { to: "/urban-navigator", label: "Navigator", icon: Map },
-  { to: "/micro-mobility", label: "Mobility", icon: Bike },
-  { to: "/geo-sales", label: "Sales", icon: BarChart2 },
+  { to: "/agritech", label: "AgriTech", icon: Sprout },
+  { to: "/green-fleet", label: "Fleet", icon: Leaf },
+  { to: "/climate-monitor", label: "Climat", icon: Wind },
 ];
 
 export function Navbar() {
@@ -13,8 +13,8 @@ export function Navbar() {
 
   return (
     <nav className="absolute top-0 left-0 right-0 z-20 flex items-center gap-1 px-3 md:px-4 h-12 md:h-14 bg-dark-bg/60 backdrop-blur-xl border-b border-white/5">
-      <Link to="/" className="mr-2 md:mr-4 text-electric-blue font-bold text-sm md:text-lg tracking-tight">
-        Mapbox 3D
+      <Link to="/" className="mr-2 md:mr-4 text-eco-green font-bold text-sm md:text-lg tracking-tight">
+        Impact<span className="text-white/60">Map</span>
       </Link>
       <div className="flex gap-0.5 md:gap-1">
         {NAV_ITEMS.map(({ to, label, icon: Icon }) => {
@@ -25,7 +25,7 @@ export function Navbar() {
               to={to}
               className={`flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg text-xs md:text-sm transition-all ${
                 isActive
-                  ? "bg-electric-blue/15 text-electric-blue border border-electric-blue/30"
+                  ? "bg-eco-green/15 text-eco-green border border-eco-green/30"
                   : "text-white/60 hover:text-white hover:bg-white/5"
               }`}
             >

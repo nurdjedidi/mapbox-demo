@@ -1,0 +1,98 @@
+{
+  "vehicles": [
+    {
+      "id": 1, "name": "Diesel 01", "type": "diesel",
+      "co2_per_km": 0.21, "fuel_liters_per_100km": 9.2,
+      "waypoints": [[-7.590, 33.595], [-7.610, 33.608], [-7.628, 33.598], [-7.618, 33.582], [-7.590, 33.595]]
+    },
+    {
+      "id": 2, "name": "Diesel 02", "type": "diesel",
+      "co2_per_km": 0.19, "fuel_liters_per_100km": 8.4,
+      "waypoints": [[-7.605, 33.572], [-7.625, 33.560], [-7.648, 33.570], [-7.638, 33.585], [-7.605, 33.572]]
+    },
+    {
+      "id": 3, "name": "Diesel 03", "type": "diesel",
+      "co2_per_km": 0.23, "fuel_liters_per_100km": 10.1,
+      "waypoints": [[-7.618, 33.612], [-7.598, 33.618], [-7.575, 33.608], [-7.585, 33.595], [-7.618, 33.612]]
+    },
+    {
+      "id": 4, "name": "Diesel 04", "type": "diesel",
+      "co2_per_km": 0.20, "fuel_liters_per_100km": 8.8,
+      "waypoints": [[-7.655, 33.578], [-7.668, 33.562], [-7.650, 33.548], [-7.635, 33.558], [-7.655, 33.578]]
+    },
+    {
+      "id": 5, "name": "Diesel 05", "type": "diesel",
+      "co2_per_km": 0.22, "fuel_liters_per_100km": 9.6,
+      "waypoints": [[-7.635, 33.545], [-7.618, 33.538], [-7.600, 33.548], [-7.610, 33.562], [-7.635, 33.545]]
+    },
+    {
+      "id": 6, "name": "Elec 01", "type": "electric",
+      "co2_per_km": 0.02, "battery_percent": 88, "autonomy_km": 185,
+      "waypoints": [[-7.595, 33.590], [-7.612, 33.602], [-7.630, 33.594], [-7.620, 33.578], [-7.595, 33.590]]
+    },
+    {
+      "id": 7, "name": "Elec 02", "type": "electric",
+      "co2_per_km": 0.02, "battery_percent": 62, "autonomy_km": 128,
+      "waypoints": [[-7.608, 33.568], [-7.628, 33.555], [-7.645, 33.565], [-7.632, 33.580], [-7.608, 33.568]]
+    },
+    {
+      "id": 8, "name": "Elec 03", "type": "electric",
+      "co2_per_km": 0.02, "battery_percent": 95, "autonomy_km": 198,
+      "waypoints": [[-7.622, 33.608], [-7.602, 33.615], [-7.578, 33.605], [-7.590, 33.592], [-7.622, 33.608]]
+    },
+    {
+      "id": 9, "name": "Elec 04", "type": "electric",
+      "co2_per_km": 0.02, "battery_percent": 34, "autonomy_km": 68,
+      "waypoints": [[-7.660, 33.572], [-7.672, 33.558], [-7.655, 33.544], [-7.640, 33.552], [-7.660, 33.572]]
+    },
+    {
+      "id": 10, "name": "Elec 05", "type": "electric",
+      "co2_per_km": 0.02, "battery_percent": 75, "autonomy_km": 155,
+      "waypoints": [[-7.640, 33.540], [-7.622, 33.532], [-7.605, 33.542], [-7.614, 33.558], [-7.640, 33.540]]
+    }
+  ],
+  "chargingStations": [
+    {
+      "id": 1, "name": "Borne Maarif",
+      "position": [-7.635, 33.578],
+      "available_slots": 3, "total_slots": 4, "power_kw": 50, "charge_time_min": 28
+    },
+    {
+      "id": 2, "name": "Borne Centre",
+      "position": [-7.610, 33.594],
+      "available_slots": 1, "total_slots": 2, "power_kw": 22, "charge_time_min": 65
+    },
+    {
+      "id": 3, "name": "Borne Ain Sebaa",
+      "position": [-7.590, 33.608],
+      "available_slots": 4, "total_slots": 6, "power_kw": 100, "charge_time_min": 15
+    },
+    {
+      "id": 4, "name": "Borne Hay Hassani",
+      "position": [-7.655, 33.548],
+      "available_slots": 2, "total_slots": 3, "power_kw": 50, "charge_time_min": 28
+    }
+  ],
+  "lezZones": [
+    {
+      "id": 1, "name": "ZFE Centre-Ville",
+      "restriction": "Diesel Euro 5 et inférieur interdit",
+      "coordinates": [[-7.628, 33.610], [-7.595, 33.610], [-7.595, 33.578], [-7.628, 33.578], [-7.628, 33.610]]
+    },
+    {
+      "id": 2, "name": "ZFE Maarif",
+      "restriction": "Diesel Euro 4 et inférieur interdit",
+      "coordinates": [[-7.650, 33.590], [-7.628, 33.590], [-7.628, 33.565], [-7.650, 33.565], [-7.650, 33.590]]
+    }
+  ],
+  "stats": {
+    "route_distance_km": 48.5,
+    "co2_fast_kg": 98.2,
+    "co2_eco_kg": 71.4,
+    "co2_saved_kg": 26.8,
+    "fuel_liters_total": 42.1,
+    "carbon_cost_eur": 4.9,
+    "fleet_electric_percent": 50,
+    "lez_alerts": 3
+  }
+}

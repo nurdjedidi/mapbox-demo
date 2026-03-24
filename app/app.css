@@ -18,6 +18,10 @@
   --color-glass: rgba(21, 27, 45, 0.7);
   --color-glass-light: rgba(255, 255, 255, 0.05);
   --color-glass-border: rgba(255, 255, 255, 0.1);
+
+  --color-eco-green: #22C55E;
+  --color-climate-blue: #3B82F6;
+  --color-agri-amber: #D97706;
 }
 
 html,

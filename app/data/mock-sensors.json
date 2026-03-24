@@ -1,0 +1,93 @@
+{
+  "sensors": [
+    { "id": 1, "type": "air", "position": [-7.590, 33.597], "pm25": 42, "no2": 48, "o3": 62, "status": "warning", "history_7d": [38, 40, 42, 48, 44, 41, 42] },
+    { "id": 2, "type": "air", "position": [-7.605, 33.602], "pm25": 18, "no2": 22, "o3": 45, "status": "good", "history_7d": [20, 19, 18, 17, 18, 19, 18] },
+    { "id": 3, "type": "air", "position": [-7.618, 33.595], "pm25": 65, "no2": 78, "o3": 88, "status": "critical", "history_7d": [55, 58, 62, 68, 65, 63, 65] },
+    { "id": 4, "type": "air", "position": [-7.628, 33.608], "pm25": 28, "no2": 35, "o3": 52, "status": "good", "history_7d": [30, 29, 28, 27, 28, 28, 28] },
+    { "id": 5, "type": "air", "position": [-7.640, 33.592], "pm25": 55, "no2": 61, "o3": 75, "status": "warning", "history_7d": [48, 50, 54, 58, 55, 53, 55] },
+    { "id": 6, "type": "air", "position": [-7.650, 33.580], "pm25": 22, "no2": 28, "o3": 48, "status": "good", "history_7d": [24, 23, 22, 21, 22, 22, 22] },
+    { "id": 7, "type": "air", "position": [-7.660, 33.570], "pm25": 71, "no2": 82, "o3": 95, "status": "critical", "history_7d": [62, 65, 70, 75, 71, 68, 71] },
+    { "id": 8, "type": "air", "position": [-7.645, 33.562], "pm25": 35, "no2": 42, "o3": 58, "status": "warning", "history_7d": [32, 33, 35, 38, 35, 34, 35] },
+    { "id": 9, "type": "air", "position": [-7.625, 33.575], "pm25": 19, "no2": 24, "o3": 46, "status": "good", "history_7d": [21, 20, 19, 18, 19, 19, 19] },
+    { "id": 10, "type": "air", "position": [-7.608, 33.582], "pm25": 48, "no2": 55, "o3": 70, "status": "warning", "history_7d": [42, 44, 47, 52, 48, 46, 48] },
+    { "id": 11, "type": "air", "position": [-7.598, 33.612], "pm25": 24, "no2": 30, "o3": 50, "status": "good", "history_7d": [26, 25, 24, 23, 24, 24, 24] },
+    { "id": 12, "type": "air", "position": [-7.578, 33.605], "pm25": 15, "no2": 18, "o3": 40, "status": "good", "history_7d": [17, 16, 15, 14, 15, 15, 15] },
+    { "id": 13, "type": "air", "position": [-7.670, 33.558], "pm25": 60, "no2": 72, "o3": 85, "status": "critical", "history_7d": [52, 55, 59, 64, 60, 58, 60] },
+    { "id": 14, "type": "air", "position": [-7.635, 33.548], "pm25": 38, "no2": 45, "o3": 62, "status": "warning", "history_7d": [34, 36, 38, 41, 38, 37, 38] },
+    { "id": 15, "type": "air", "position": [-7.612, 33.558], "pm25": 20, "no2": 25, "o3": 47, "status": "good", "history_7d": [22, 21, 20, 19, 20, 20, 20] },
+    { "id": 16, "type": "water", "position": [-7.595, 33.582], "ph": 7.1, "nitrates": 38, "turbidity": 2.1, "status": "good", "history_7d": [36, 37, 38, 38, 37, 38, 38] },
+    { "id": 17, "type": "water", "position": [-7.615, 33.590], "ph": 6.8, "nitrates": 52, "turbidity": 4.8, "status": "warning", "history_7d": [44, 46, 50, 54, 52, 50, 52] },
+    { "id": 18, "type": "water", "position": [-7.632, 33.572], "ph": 6.5, "nitrates": 68, "turbidity": 8.2, "status": "critical", "history_7d": [58, 61, 65, 70, 68, 65, 68] },
+    { "id": 19, "type": "water", "position": [-7.655, 33.585], "ph": 7.3, "nitrates": 28, "turbidity": 1.5, "status": "good", "history_7d": [26, 27, 28, 28, 27, 28, 28] },
+    { "id": 20, "type": "water", "position": [-7.642, 33.548], "ph": 7.0, "nitrates": 45, "turbidity": 3.2, "status": "warning", "history_7d": [40, 42, 44, 47, 45, 44, 45] },
+    { "id": 21, "type": "water", "position": [-7.608, 33.568], "ph": 7.4, "nitrates": 22, "turbidity": 1.0, "status": "good", "history_7d": [20, 21, 22, 22, 21, 22, 22] },
+    { "id": 22, "type": "water", "position": [-7.620, 33.545], "ph": 6.3, "nitrates": 78, "turbidity": 11.5, "status": "critical", "history_7d": [65, 68, 73, 80, 78, 75, 78] },
+    { "id": 23, "type": "noise", "position": [-7.600, 33.594], "decibels": 58, "status": "good", "history_7d": [55, 56, 58, 60, 58, 57, 58] },
+    { "id": 24, "type": "noise", "position": [-7.618, 33.600], "decibels": 72, "status": "warning", "history_7d": [68, 70, 72, 75, 72, 70, 72] },
+    { "id": 25, "type": "noise", "position": [-7.635, 33.588], "decibels": 81, "status": "critical", "history_7d": [76, 78, 80, 84, 81, 79, 81] },
+    { "id": 26, "type": "noise", "position": [-7.648, 33.575], "decibels": 64, "status": "good", "history_7d": [62, 63, 64, 66, 64, 63, 64] },
+    { "id": 27, "type": "noise", "position": [-7.660, 33.560], "decibels": 78, "status": "warning", "history_7d": [74, 76, 78, 80, 78, 77, 78] },
+    { "id": 28, "type": "noise", "position": [-7.625, 33.560], "decibels": 55, "status": "good", "history_7d": [53, 54, 55, 57, 55, 54, 55] },
+    { "id": 29, "type": "noise", "position": [-7.605, 33.575], "decibels": 69, "status": "warning", "history_7d": [65, 67, 69, 71, 69, 68, 69] },
+    { "id": 30, "type": "noise", "position": [-7.642, 33.542], "decibels": 85, "status": "critical", "history_7d": [79, 82, 85, 88, 85, 83, 85] }
+  ],
+  "riskZones": [
+    {
+      "id": 1, "type": "flood", "name": "Zone inondable Bouskoura",
+      "coordinates": [[-7.625, 33.558], [-7.600, 33.558], [-7.600, 33.538], [-7.625, 33.538], [-7.625, 33.558]],
+      "risk_level": "high", "population_exposed": 18500,
+      "measures": "Système d'alerte précoce, digue renforcée en cours"
+    },
+    {
+      "id": 2, "type": "drought", "name": "Zone stress hydrique Sud-Est",
+      "coordinates": [[-7.660, 33.538], [-7.630, 33.538], [-7.630, 33.520], [-7.660, 33.520], [-7.660, 33.538]],
+      "risk_level": "medium", "population_exposed": 9200,
+      "measures": "Restrictions arrosage, réservoirs de secours"
+    }
+  ],
+  "alerts": [
+    {
+      "id": 1, "sensor_id": 3,
+      "message": "PM2.5 dépasse seuil OMS (>25 µg/m³) — Zone Centre",
+      "severity": "critical", "timestamp": "2026-03-24T14:30:00Z"
+    },
+    {
+      "id": 2, "sensor_id": 7,
+      "message": "Pollution air critique — Quartier industriel Ain Sebaa",
+      "severity": "critical", "timestamp": "2026-03-24T13:15:00Z"
+    },
+    {
+      "id": 3, "sensor_id": 18,
+      "message": "Nitrates >50 mg/L (limite UE) — Oued Bouskoura",
+      "severity": "critical", "timestamp": "2026-03-24T12:00:00Z"
+    },
+    {
+      "id": 4, "sensor_id": 25,
+      "message": "Bruit >80dB en zone résidentielle (nuit interdit >50dB)",
+      "severity": "warning", "timestamp": "2026-03-24T11:30:00Z"
+    },
+    {
+      "id": 5, "sensor_id": 5,
+      "message": "PM2.5 en hausse — Tendance préoccupante zone Maarif",
+      "severity": "warning", "timestamp": "2026-03-24T10:00:00Z"
+    }
+  ],
+  "yearlyData": {
+    "2020": { "avg_pm25": 58, "avg_nitrates": 62, "avg_noise": 74, "compliant_percent": 42 },
+    "2021": { "avg_pm25": 54, "avg_nitrates": 60, "avg_noise": 73, "compliant_percent": 46 },
+    "2022": { "avg_pm25": 50, "avg_nitrates": 56, "avg_noise": 71, "compliant_percent": 51 },
+    "2023": { "avg_pm25": 46, "avg_nitrates": 52, "avg_noise": 70, "compliant_percent": 56 },
+    "2024": { "avg_pm25": 44, "avg_nitrates": 50, "avg_noise": 69, "compliant_percent": 60 },
+    "2025": { "avg_pm25": 42, "avg_nitrates": 48, "avg_noise": 68, "compliant_percent": 64 },
+    "2026": { "avg_pm25": 40, "avg_nitrates": 46, "avg_noise": 67, "compliant_percent": 68 }
+  },
+  "stats": {
+    "sensors_compliant_percent": 68,
+    "zones_exceeding": 8,
+    "population_exposed_pollution": 52000,
+    "avg_pm25_reduction_yearly": -12,
+    "water_quality_index": 64,
+    "before_factory_pm25": 68,
+    "after_factory_pm25": 44
+  }
+}

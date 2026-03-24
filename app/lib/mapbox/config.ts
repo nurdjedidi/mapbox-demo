@@ -10,8 +10,6 @@ export const MAP_STYLES = {
   navigation: "mapbox://styles/mapbox/navigation-night-v1",
 } as const;
 
-export type CityKey = "dubai" | "casablanca";
-
 export interface CityConfig {
   name: string;
   center: [number, number];
@@ -21,7 +19,17 @@ export interface CityConfig {
   description: string;
 }
 
+export type CityKey = "dubai" | "casablanca" | "agadir";
+
 export const CITIES: Record<CityKey, CityConfig> = {
+  agadir: {
+    name: "Agadir",
+    center: [-9.60, 30.42],
+    zoom: 13,
+    pitch: 50,
+    bearing: 0,
+    description: "Souss-Massa — agriculture intensive, irrigation, serres",
+  },
   dubai: {
     name: "Dubai",
     center: [55.2744, 25.1972],

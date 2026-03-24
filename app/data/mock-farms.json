@@ -1,0 +1,137 @@
+{
+  "parcels": [
+    {
+      "id": "A1", "name": "Parcelle Tomate A1",
+      "coordinates": [[-9.640, 30.450], [-9.625, 30.450], [-9.625, 30.440], [-9.640, 30.440], [-9.640, 30.450]],
+      "crop": "Tomate", "area_hectares": 14.2, "health": "healthy",
+      "yield_predicted": 7.8, "last_treatment": "2026-03-18", "irrigation_m3": 420, "stage": "growth"
+    },
+    {
+      "id": "A2", "name": "Parcelle Avocat A2",
+      "coordinates": [[-9.622, 30.450], [-9.607, 30.450], [-9.607, 30.438], [-9.622, 30.438], [-9.622, 30.450]],
+      "crop": "Avocat", "area_hectares": 18.5, "health": "healthy",
+      "yield_predicted": 9.1, "last_treatment": "2026-03-20", "irrigation_m3": 580, "stage": "growth"
+    },
+    {
+      "id": "B1", "name": "Parcelle Poivron B1",
+      "coordinates": [[-9.660, 30.438], [-9.645, 30.438], [-9.645, 30.426], [-9.660, 30.426], [-9.660, 30.438]],
+      "crop": "Poivron", "area_hectares": 10.3, "health": "stress",
+      "yield_predicted": 4.2, "last_treatment": "2026-03-10", "irrigation_m3": 680, "stage": "growth"
+    },
+    {
+      "id": "B2", "name": "Parcelle Blé B2",
+      "coordinates": [[-9.642, 30.436], [-9.628, 30.436], [-9.628, 30.424], [-9.642, 30.424], [-9.642, 30.436]],
+      "crop": "Blé", "area_hectares": 22.0, "health": "stress",
+      "yield_predicted": 3.5, "last_treatment": "2026-03-05", "irrigation_m3": 310, "stage": "growth"
+    },
+    {
+      "id": "B3", "name": "Parcelle Agrumes B3",
+      "coordinates": [[-9.626, 30.436], [-9.610, 30.436], [-9.610, 30.424], [-9.626, 30.424], [-9.626, 30.436]],
+      "crop": "Agrumes", "area_hectares": 16.8, "health": "healthy",
+      "yield_predicted": 8.3, "last_treatment": "2026-03-22", "irrigation_m3": 490, "stage": "growth"
+    },
+    {
+      "id": "C1", "name": "Parcelle Tomate C1",
+      "coordinates": [[-9.665, 30.424], [-9.650, 30.424], [-9.650, 30.412], [-9.665, 30.412], [-9.665, 30.424]],
+      "crop": "Tomate", "area_hectares": 11.5, "health": "critical",
+      "yield_predicted": 1.8, "last_treatment": "2026-02-28", "irrigation_m3": 820, "stage": "stress"
+    },
+    {
+      "id": "C2", "name": "Parcelle Courgette C2",
+      "coordinates": [[-9.648, 30.422], [-9.633, 30.422], [-9.633, 30.410], [-9.648, 30.410], [-9.648, 30.422]],
+      "crop": "Courgette", "area_hectares": 8.7, "health": "healthy",
+      "yield_predicted": 6.5, "last_treatment": "2026-03-19", "irrigation_m3": 360, "stage": "growth"
+    },
+    {
+      "id": "C3", "name": "Parcelle Avocat C3",
+      "coordinates": [[-9.630, 30.422], [-9.614, 30.422], [-9.614, 30.410], [-9.630, 30.410], [-9.630, 30.422]],
+      "crop": "Avocat", "area_hectares": 20.1, "health": "critical",
+      "yield_predicted": 2.1, "last_treatment": "2026-02-20", "irrigation_m3": 950, "stage": "stress"
+    },
+    {
+      "id": "D1", "name": "Parcelle Blé D1",
+      "coordinates": [[-9.670, 30.410], [-9.655, 30.410], [-9.655, 30.398], [-9.670, 30.398], [-9.670, 30.410]],
+      "crop": "Blé", "area_hectares": 25.3, "health": "healthy",
+      "yield_predicted": 7.2, "last_treatment": "2026-03-21", "irrigation_m3": 280, "stage": "harvest"
+    },
+    {
+      "id": "D2", "name": "Parcelle Poivron D2",
+      "coordinates": [[-9.652, 30.408], [-9.637, 30.408], [-9.637, 30.396], [-9.652, 30.396], [-9.652, 30.408]],
+      "crop": "Poivron", "area_hectares": 13.4, "health": "stress",
+      "yield_predicted": 3.9, "last_treatment": "2026-03-08", "irrigation_m3": 590, "stage": "growth"
+    },
+    {
+      "id": "D3", "name": "Parcelle Agrumes D3",
+      "coordinates": [[-9.634, 30.408], [-9.618, 30.408], [-9.618, 30.396], [-9.634, 30.396], [-9.634, 30.408]],
+      "crop": "Agrumes", "area_hectares": 17.6, "health": "healthy",
+      "yield_predicted": 8.8, "last_treatment": "2026-03-23", "irrigation_m3": 460, "stage": "growth"
+    },
+    {
+      "id": "E1", "name": "Parcelle Tomate E1",
+      "coordinates": [[-9.620, 30.408], [-9.605, 30.408], [-9.605, 30.396], [-9.620, 30.396], [-9.620, 30.408]],
+      "crop": "Tomate", "area_hectares": 9.8, "health": "healthy",
+      "yield_predicted": 7.0, "last_treatment": "2026-03-17", "irrigation_m3": 400, "stage": "growth"
+    }
+  ],
+  "weatherStations": [
+    {
+      "id": 1, "name": "Station Nord",
+      "position": [-9.618, 30.452],
+      "temp": 22, "humidity": 68, "rain_24h": 0, "wind_kmh": 14, "forecast": "Ensoleillé"
+    },
+    {
+      "id": 2, "name": "Station Centre",
+      "position": [-9.645, 30.425],
+      "temp": 24, "humidity": 55, "rain_24h": 0, "wind_kmh": 18, "forecast": "Partiellement nuageux"
+    },
+    {
+      "id": 3, "name": "Station Sud",
+      "position": [-9.630, 30.398],
+      "temp": 26, "humidity": 42, "rain_24h": 0, "wind_kmh": 22, "forecast": "Chaud et sec"
+    },
+    {
+      "id": 4, "name": "Station Côtière",
+      "position": [-9.672, 30.438],
+      "temp": 20, "humidity": 78, "rain_24h": 2, "wind_kmh": 28, "forecast": "Nuageux"
+    }
+  ],
+  "alerts": [
+    {
+      "id": 1, "type": "hydric_stress", "parcel": "C1",
+      "message": "Stress hydrique sévère — irrigation urgente parcelle C1",
+      "severity": "critical", "timestamp": "2026-03-24T08:15:00Z"
+    },
+    {
+      "id": 2, "type": "disease", "parcel": "C3",
+      "message": "Maladie fongique (Phytophthora) détectée parcelle C3",
+      "severity": "critical", "timestamp": "2026-03-24T07:30:00Z"
+    },
+    {
+      "id": 3, "type": "hydric_stress", "parcel": "B1",
+      "message": "Déficit hydrique modéré — surveiller parcelle B1",
+      "severity": "warning", "timestamp": "2026-03-24T06:00:00Z"
+    },
+    {
+      "id": 4, "type": "treatment", "parcel": "B2",
+      "message": "Traitement phytosanitaire requis parcelle B2 (>15j sans intervention)",
+      "severity": "warning", "timestamp": "2026-03-23T18:00:00Z"
+    }
+  ],
+  "tractorWaypoints": [
+    [-9.633, 30.422],
+    [-9.625, 30.440],
+    [-9.607, 30.438],
+    [-9.610, 30.424],
+    [-9.618, 30.408],
+    [-9.633, 30.422]
+  ],
+  "stats": {
+    "total_hectares": 188.2,
+    "avg_yield_predicted": 5.85,
+    "water_consumption_m3": 6340,
+    "parcels_healthy": 7,
+    "parcels_stress": 3,
+    "parcels_critical": 2,
+    "co2_sequestered_tons": 312
+  }
+}
