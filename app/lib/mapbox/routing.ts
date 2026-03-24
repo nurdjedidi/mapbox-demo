@@ -1,8 +1,7 @@
 import mapboxgl from "mapbox-gl";
 import { MAPBOX_TOKEN } from "./config";
-
-mapboxgl.accessToken = MAPBOX_TOKEN;
 console.log("Token chargé :", MAPBOX_TOKEN);
+mapboxgl.accessToken = MAPBOX_TOKEN;
 
 export interface RouteOptions {
   profile?: "driving" | "walking" | "cycling" | "driving-traffic";
@@ -37,6 +36,7 @@ export async function getRoute(
   end: [number, number],
   options: RouteOptions = {}
 ): Promise<RouteData[]> {
+  console.log("Token chargé :", MAPBOX_TOKEN);
   const {
     profile = "driving",
     alternatives = true,
