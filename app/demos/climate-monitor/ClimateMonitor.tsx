@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Wind, Droplets, Volume2 } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Wind, Droplets, Volume2, AlertTriangle, MapPin } from "lucide-react";
 import { MapContainer } from "~/components/map/MapContainer";
 import { DemoLayout } from "~/components/layout/DemoLayout";
 import { SidePanel } from "~/components/layout/SidePanel";
@@ -12,10 +12,10 @@ import sensorsData from "~/data/mock-sensors.json";
 
 type PollutionType = "air" | "water" | "noise";
 
-const TYPE_OPTIONS: { value: PollutionType; label: string; icon: React.ReactNode }[] = [
-  { value: "air", label: "Qualité air", icon: <Wind size={11} /> },
-  { value: "water", label: "Qualité eau", icon: <Droplets size={11} /> },
-  { value: "noise", label: "Bruit", icon: <Volume2 size={11} /> },
+const TYPE_OPTIONS: { value: PollutionType; label: string; desc: string; icon: React.ReactNode; color: string }[] = [
+  { value: "air", label: "Air", desc: "PM2.5, NO₂, Ozone", icon: <Wind size={13} />, color: "text-climate-blue" },
+  { value: "water", label: "Eau", desc: "Nitrates, pH, Turbidité", icon: <Droplets size={13} />, color: "text-climate-blue" },
+  { value: "noise", label: "Bruit", desc: "Décibels en zone urbaine", icon: <Volume2 size={13} />, color: "text-agri-amber" },
 ];
 
 export function ClimateMonitor() {
@@ -32,6 +32,12 @@ export function ClimateMonitor() {
   const stats = sensorsData.stats;
 
   const cityConfig = CITIES.casablanca;
+
+  // Quick summary for current filter
+  const filteredSensors = useMemo(() => sensors.filter((s) => s.type === pollutionType), [sensors, pollutionType]);
+  const okCount = filteredSensors.filter((s) => s.status === "good").length;
+  const warnCount = filteredSensors.filter((s) => s.status === "warning").length;
+  const critCount = filteredSensors.filter((s) => s.status === "critical").length;
 
   return (
     <DemoLayout>
@@ -50,29 +56,62 @@ export function ClimateMonitor() {
         {showRiskZones && <RiskZones zones={riskZones} />}
       </MapContainer>
 
-      <SidePanel title="Climate Monitor — Casablanca">
+      <SidePanel title="Environnement — Casablanca">
+        {/* Intro text */}
+        <p className="text-xs text-white/40 leading-relaxed -mt-1">
+          Surveillance en temps réel de la qualité de l'air, de l'eau et du bruit.
+          Cliquez sur un capteur sur la carte pour voir ses données.
+        </p>
+
         {/* Pollution type selector */}
         <div>
-          <label className="text-xs text-white/40 uppercase tracking-wider block mb-2">Type de pollution</label>
-          <div className="flex flex-col gap-1">
+          <label className="text-xs text-white/40 uppercase tracking-wider block mb-2">
+            Que voulez-vous surveiller ?
+          </label>
+          <div className="flex flex-col gap-1.5">
             {TYPE_OPTIONS.map((opt) => (
               <button
                 key={opt.value}
                 onClick={() => { setPollutionType(opt.value); setSelectedSensor(null); }}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all text-left ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
                   pollutionType === opt.value
-                    ? "bg-white/10 border border-white/20 text-white"
-                    : "text-white/50 hover:text-white/70 hover:bg-white/5"
+                    ? "bg-white/10 border border-white/20"
+                    : "text-white/50 hover:text-white/70 hover:bg-white/5 border border-transparent"
                 }`}
               >
-                <span className={`${
-                  opt.value === "air" ? "text-climate-blue" : opt.value === "water" ? "text-climate-blue" : "text-agri-amber"
-                }`}>
-                  {opt.icon}
-                </span>
-                {opt.label}
+                <span className={opt.color}>{opt.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <span className={`text-xs font-semibold block ${pollutionType === opt.value ? "text-white" : "text-white/60"}`}>
+                    {opt.label}
+                  </span>
+                  <span className="text-[10px] text-white/30">{opt.desc}</span>
+                </div>
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Quick status summary */}
+        <div className="glass-panel p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <MapPin size={12} className="text-white/40" />
+            <span className="text-xs text-white/40">
+              {filteredSensors.length} capteurs {pollutionType === "air" ? "air" : pollutionType === "water" ? "eau" : "bruit"}
+            </span>
+          </div>
+          <div className="flex gap-3 text-xs">
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-eco-green" />
+              <span className="text-white/60">{okCount} OK</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-warning" />
+              <span className="text-white/60">{warnCount} alerte{warnCount > 1 ? "s" : ""}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-danger" />
+              <span className="text-white/60">{critCount} critique{critCount > 1 ? "s" : ""}</span>
+            </div>
           </div>
         </div>
 
@@ -84,7 +123,7 @@ export function ClimateMonitor() {
               showRiskZones ? "text-white/80" : "text-white/30"
             }`}
           >
-            <span>Zones à risque (inondation / sécheresse)</span>
+            <span>Zones inondation & sécheresse</span>
             <div className={`w-7 h-4 rounded-full relative ${showRiskZones ? "bg-climate-blue/40" : "bg-white/10"}`}>
               <div className={`absolute top-0.5 w-3 h-3 rounded-full transition-all ${showRiskZones ? "bg-climate-blue left-3.5" : "bg-white/30 left-0.5"}`} />
             </div>
@@ -96,14 +135,13 @@ export function ClimateMonitor() {
           <SensorDetail sensor={selectedSensor} onClose={() => setSelectedSensor(null)} />
         )}
 
-        {/* Alerts */}
+        {/* Alerts — simplified */}
         {alerts.length > 0 && (
           <div className="glass-panel p-3">
             <div className="flex items-center gap-2 mb-2">
-              <Wind size={13} className="text-danger" />
-              <span className="text-xs text-white/40 uppercase tracking-wider">Alertes actives</span>
-              <span className="ml-auto text-xs bg-danger/20 text-danger border border-danger/30 rounded px-1.5 py-0.5 font-mono">
-                {alerts.length}
+              <AlertTriangle size={13} className="text-danger" />
+              <span className="text-xs text-white/50 font-medium">
+                {alerts.length} problème{alerts.length > 1 ? "s" : ""} détecté{alerts.length > 1 ? "s" : ""}
               </span>
             </div>
             <div className="space-y-2 max-h-36 overflow-y-auto">
@@ -119,7 +157,7 @@ export function ClimateMonitor() {
                   <div className="flex items-center gap-1.5 mb-0.5">
                     <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${a.severity === "critical" ? "bg-danger" : "bg-warning"}`} />
                     <span className={`font-semibold ${a.severity === "critical" ? "text-danger" : "text-warning"}`}>
-                      Capteur #{a.sensor_id}
+                      {a.severity === "critical" ? "Critique" : "Attention"}
                     </span>
                   </div>
                   <p className="text-white/60 leading-relaxed">{a.message}</p>

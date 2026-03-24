@@ -38,38 +38,77 @@ function getBearing(from: [number, number], to: [number, number]): number {
   return ((Math.atan2(y, x) * 180) / Math.PI + 360) % 360;
 }
 
-function createVehicleEl(v: FleetVehicle): HTMLDivElement {
+interface VehicleElements {
+  el: HTMLDivElement;
+  puck: HTMLDivElement;
+}
+
+function createVehicleEl(v: FleetVehicle): VehicleElements {
   const isDiesel = v.type === "diesel";
   const color = isDiesel ? "#6B7280" : "#22C55E";
-  const badge = isDiesel
-    ? `<span style="font-size:8px;font-weight:700;color:#F87171;font-family:'JetBrains Mono',monospace;">${(v.co2_per_km * 10).toFixed(0)}g CO₂</span>`
-    : `<span style="font-size:8px;font-weight:700;color:#22C55E;font-family:'JetBrains Mono',monospace;">⚡${v.battery_percent ?? 0}%</span>`;
+  const badgeText = isDiesel
+    ? `${(v.co2_per_km * 10).toFixed(0)}g CO₂`
+    : `⚡ ${v.battery_percent ?? 0}%`;
+  const badgeColor = isDiesel ? "#F87171" : "#22C55E";
 
   const el = document.createElement("div");
   el.style.cssText = "display:flex;flex-direction:column;align-items:center;cursor:default;";
-  el.innerHTML = `
-    <div style="background:rgba(10,14,26,0.85);border:1px solid ${color}55;border-radius:6px;padding:2px 5px;margin-bottom:3px;">
-      ${badge}
-    </div>
-    <div style="
-      width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;
-      background:${color}22;border:2px solid ${color};
-      box-shadow:0 2px 8px rgba(0,0,0,0.35),0 0 10px ${color}44;
-    ">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14 18V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h1"/>
-        <path d="M15 18H9"/>
-        <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
-        <circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>
-      </svg>
-    </div>
+
+  // Badge — always readable (no rotation)
+  const badge = document.createElement("div");
+  badge.style.cssText = `
+    background:rgba(10,14,26,0.9);border-radius:10px;padding:2px 7px;margin-bottom:4px;
+    border:1px solid ${color}44;white-space:nowrap;
   `;
-  return el;
+  badge.innerHTML = `<span style="font-size:9px;font-weight:700;color:${badgeColor};font-family:'JetBrains Mono',monospace;">${badgeText}</span>`;
+  el.appendChild(badge);
+
+  // Puck — rotates to show bearing
+  const puck = document.createElement("div");
+  puck.style.cssText = `
+    width:28px;height:28px;border-radius:50%;position:relative;
+    background:radial-gradient(circle at 40% 35%, ${color}44, ${color}11);
+    border:2.5px solid ${color};
+    box-shadow:0 2px 10px rgba(0,0,0,0.4), 0 0 12px ${color}33;
+    transition:transform 0.1s linear;
+  `;
+
+  // Direction arrow (triangle pointing up, rotates with puck)
+  const arrow = document.createElement("div");
+  arrow.style.cssText = `
+    position:absolute;top:-5px;left:50%;transform:translateX(-50%);
+    width:0;height:0;
+    border-left:5px solid transparent;border-right:5px solid transparent;
+    border-bottom:6px solid ${color};
+    filter:drop-shadow(0 0 3px ${color}88);
+  `;
+  puck.appendChild(arrow);
+
+  // Inner dot
+  const dot = document.createElement("div");
+  dot.style.cssText = `
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:10px;height:10px;border-radius:50%;
+    background:${color};
+    box-shadow:0 0 6px ${color}88;
+  `;
+  puck.appendChild(dot);
+
+  el.appendChild(puck);
+
+  // Name label
+  const name = document.createElement("div");
+  name.style.cssText = `font-size:8px;color:rgba(255,255,255,0.35);margin-top:2px;font-family:'JetBrains Mono',monospace;`;
+  name.textContent = v.name;
+  el.appendChild(name);
+
+  return { el, puck };
 }
 
 export function VehicleLayer({ vehicles, isPlaying, speed, onProgress }: VehicleLayerProps) {
   const { map } = useMap();
   const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const pucksRef = useRef<HTMLDivElement[]>([]);
   const animRef = useRef<number | null>(null);
   const startRef = useRef<number | null>(null);
   const accRef = useRef(0);
@@ -82,6 +121,7 @@ export function VehicleLayer({ vehicles, isPlaying, speed, onProgress }: Vehicle
       // Remove old
       markersRef.current.forEach((m) => m.remove());
       markersRef.current = [];
+      pucksRef.current = [];
 
       vehicles.forEach((v) => {
         const isDiesel = v.type === "diesel";
@@ -111,17 +151,19 @@ export function VehicleLayer({ vehicles, isPlaying, speed, onProgress }: Vehicle
           paint: { "line-color": trailColor, "line-width": 3, "line-opacity": 0.85 },
         });
 
-        const el = createVehicleEl(v);
-        const marker = new mapboxgl.Marker({ element: el, rotationAlignment: "map", pitchAlignment: "map" })
+        const { el, puck } = createVehicleEl(v);
+        const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
           .setLngLat(v.waypoints[0])
           .addTo(map);
         markersRef.current.push(marker);
+        pucksRef.current.push(puck);
       });
     });
 
     return () => {
       markersRef.current.forEach((m) => m.remove());
       markersRef.current = [];
+      pucksRef.current = [];
       try {
         vehicles.forEach((v) => {
           if (map.getLayer(`gf-route-${v.id}`)) map.removeLayer(`gf-route-${v.id}`);
@@ -145,11 +187,17 @@ export function VehicleLayer({ vehicles, isPlaying, speed, onProgress }: Vehicle
 
       vehicles.forEach((v, i) => {
         const marker = markersRef.current[i];
+        const puck = pucksRef.current[i];
         if (!marker) return;
         const pos = interpolate(v.waypoints, progress);
         const next = interpolate(v.waypoints, Math.min(progress + 0.015, 0.99));
         marker.setLngLat(pos);
-        marker.setRotation(getBearing(pos, next) - 90);
+
+        // Rotate only the puck, not the whole marker
+        if (puck) {
+          const bearing = getBearing(pos, next);
+          puck.style.transform = `rotate(${bearing}deg)`;
+        }
 
         const trailIdx = Math.floor(progress * (v.waypoints.length - 1)) + 1;
         const trail = [...v.waypoints.slice(0, trailIdx), pos];

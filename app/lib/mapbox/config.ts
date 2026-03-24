@@ -24,8 +24,8 @@ export type CityKey = "dubai" | "casablanca" | "agadir";
 export const CITIES: Record<CityKey, CityConfig> = {
   agadir: {
     name: "Agadir",
-    center: [-9.60, 30.42],
-    zoom: 13,
+    center: [-9.47, 30.36],
+    zoom: 12.5,
     pitch: 50,
     bearing: 0,
     description: "Souss-Massa — agriculture intensive, irrigation, serres",

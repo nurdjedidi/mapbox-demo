@@ -1,6 +1,6 @@
-# Mapbox 3D Demo App
+# ImpactMap — AgriTech · Green Fleet · Climate Monitor
 
-Application de démonstration de visualisation cartographique immersive, construite pour showcaser des cas d'usage à fort ROI métier sur des données géospatiales.
+Démos cartographiques 3D orientées **impact environnemental** et ROI mesurable, construites sur Mapbox GL JS.
 
 ## Stack technique
 
@@ -10,7 +10,7 @@ Application de démonstration de visualisation cartographique immersive, constru
 | Carte | Mapbox GL JS (chargé dynamiquement côté client) |
 | Style | Tailwind CSS v4 (`@theme`) |
 | UI | Glassmorphism dark — Inter + JetBrains Mono |
-| Animations | Framer Motion |
+| Animations | Framer Motion + requestAnimationFrame |
 | Icons | Lucide React |
 | Build | Vite 7 |
 
@@ -18,48 +18,47 @@ Application de démonstration de visualisation cartographique immersive, constru
 
 ## Démos
 
-### 1. Urban Navigator 3D — `/urban-navigator`
-Navigation immersive dans une ville 3D.
+### 1. AgriTech Precision — `/agritech`
+Dashboard de farming de précision sur la plaine du Souss-Massa (Agadir).
 
-- Calcul de routes via **Mapbox Directions API** (3 alternatives : Rapide / Équilibré / Scenic)
-- Villes : **Dubai** et **Casablanca** (12 landmarks chacune)
-- Animation style Google Maps : caméra qui suit un véhicule au ras du sol (zoom 17.5, pitch 72°)
-- Bearing dynamique calculé point à point — transition douce anti-saut 360°→0°
-- Trail blanc derrière le véhicule, vue panoramique des buildings 3D
-- Instructions turn-by-turn affichées en temps réel
+- **12 parcelles 3D** (`fill-extrusion`) colorées par santé : saine / stress / critique
+- Hauteur proportionnelle au rendement prévu (t/ha)
+- **Heatmap switchable** : stress hydrique · traitements · rendement
+- **4 stations météo** avec température, humidité, pluie 24h
+- **Simulation tracteur** animée sur route TSP entre parcelles
+- Alertes : stress hydrique, maladie fongique, gelée nocturne
+- Style satellite (`satellite-streets-v12`)
 
-**ROI démontré** : expérience utilisateur premium pour apps de navigation / tourisme urbain.
-
----
-
-### 2. Micro-Mobility Dashboard — `/micro-mobility`
-Dashboard opérationnel de gestion de flotte légère.
-
-- **30 véhicules** (vélos + trottinettes) sur Dubai avec simulation temps réel
-- Markers style Pony : icône SVG + barre batterie + couleur par statut
-- Statuts : Disponible (vert) / En course (rouge) / En charge (orange)
-- **8 stations** de parking/recharge avec jauge de capacité
-- Heatmap de densité de disponibilité
-- Simulation live : transitions de statut, mouvements, revenus qui s'incrémentent toutes les 2s
-- KPIs : CA journalier animé, taux de rotation, alertes rebalancing avec calcul ROI (coût vs revenu potentiel)
-
-**ROI démontré** : réduction des zones sous-desservies → +35 AED par course non manquée.
+**ROI** : −30% consommation eau, +18% rendement grâce au monitoring parcellaire.
 
 ---
 
-### 3. Geo-Sales Intelligence — `/geo-sales`
-Tableau de bord géo-commercial pour PME.
+### 2. Green Fleet — `/green-fleet`
+Transport décarboné — flotte mixte diesel/électrique sur Casablanca.
 
-- **50 clients** répartis sur 6 zones de Casablanca
-- Segments : Premium (>25k MAD) · Standard · Prospect · Inactif
-- Taille des markers proportionnelle au CA mensuel
-- **Heatmap CA** — densité de revenus par zone géographique
-- **Zones commerciales** colorées par performance (vert = fort CA, rouge = angle mort)
-- Filtres : par segment et par commercial (Karim / Leila / Omar)
-- Alertes : clients sans contact depuis +45 jours, prospects non couverts
-- Fiche client au clic : CA, dernier contact coloré, zone, commercial
+- **10 véhicules** animés (5 diesel gris, 5 électriques verts) avec trails colorés
+- **Bornes de recharge** avec slots disponibles, puissance kW, temps de charge
+- **Zones ZFE** (low emission zones) en rouge — diesel restreint
+- **Bilan carbone** comparatif : mode Rapide vs Éco (−27% CO₂)
+- Composition flotte : barre électrique/diesel
+- Alertes ZFE : véhicules diesel en zone restreinte
 
-**ROI démontré** : identifier les zones à fort potentiel non couvertes → prioriser la prospection commerciale.
+**ROI** : −27% émissions CO₂, réduction coût carbone de 4.90€/trajet.
+
+---
+
+### 3. Climate Monitor — `/climate-monitor`
+Surveillance environnementale en temps réel sur Casablanca.
+
+- **30 capteurs** (air / eau / bruit) colorés par statut (OK / alerte / critique)
+- Clic capteur → fiche détaillée + mini-graphe 7 jours
+- **Heatmap pollution** multi-couches (PM2.5, nitrates, bruit)
+- **Timeline 2020-2026** : slider pour voir l'évolution de la pollution
+- **Scénario Avant/Après** fermeture usine (impact PM2.5)
+- **Zones à risque** : inondation (bleu) et sécheresse (orange) avec population exposée
+- **Export rapport ESG** en CSV
+
+**ROI** : conformité réglementaire, alertes précoces, reporting ESG automatisé.
 
 ---
 
@@ -94,17 +93,17 @@ app/
 │   ├── map/             # MapContainer (SSR-safe, dynamic import)
 │   └── shared/          # StatCard, AnimatedNumber
 ├── demos/
-│   ├── urban-navigator/ # RouteAnimation, RouteSearch, instructions
-│   ├── micro-mobility/  # VehicleLayer, StationLayer, Heatmap, Simulation
-│   └── geo-sales/       # CustomerLayer, TerritoryLayer, RevenueHeatmap, Stats
+│   ├── agritech/        # FarmParcelsLayer, HeatmapLayer, WeatherStations, TractorRoute
+│   ├── green-fleet/     # VehicleLayer, ChargingStations, LEZones, CarbonStats
+│   └── climate-monitor/ # SensorsLayer, PollutionHeatmap, RiskZones, ClimateStatsPanel
 ├── data/
-│   ├── mock-mobility-vehicles.json
-│   ├── mock-stations.json
-│   └── mock-customers.json
+│   ├── mock-farms.json
+│   ├── mock-fleet-eco.json
+│   └── mock-sensors.json
 ├── lib/
 │   ├── mapbox/          # config, routing, geocoding
 │   └── hooks/           # useMap (Context)
-└── routes/              # home, urban-navigator, micro-mobility, geo-sales
+└── routes/              # home, agritech, green-fleet, climate-monitor
 ```
 
 ---
@@ -115,10 +114,10 @@ Couleurs définies via `@theme` dans `app/app.css` :
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `electric-blue` | `#00D9FF` | Accent principal |
-| `success` | `#00FF88` | Positif / disponible |
-| `warning` | `#FFB800` | Alerte / charging |
-| `danger` | `#FF3366` | Critique / inactif |
+| `eco-green` | `#22C55E` | Électrique / sain / positif |
+| `climate-blue` | `#3B82F6` | Eau / capteurs / heatmap |
+| `agri-amber` | `#D97706` | Stress / bruit / agriculture |
+| `danger` | `#FF3366` | Critique / alerte |
 | `dark-bg` | `#0A0E1A` | Fond général |
 
 Classes utilitaires : `.glass-panel`, `.glass-button`, `.text-glow`
@@ -128,6 +127,6 @@ Classes utilitaires : `.glass-panel`, `.glass-button`, `.text-glow`
 ## Notes techniques
 
 - **SSR compatible** : Mapbox GL JS importé dynamiquement (`import("mapbox-gl")`) dans `useEffect` uniquement
-- **Cleanup guards** : tous les `useEffect` wrappent le cleanup dans `try/catch` — évite le crash `getOwnLayer` au changement de route
-- **Pas de re-renders sur animation** : progress Fleet via `ref` + DOM direct (0 setState par frame)
+- **Cleanup guards** : tous les `useEffect` wrappent le cleanup dans `try/catch` — évite le crash au changement de route
+- **0 setState par frame** : animations Fleet via `ref` + DOM direct
 - **Mobile** : SidePanel = bottom sheet (45vh → 80vh), Navbar compacte (icônes seules < 640px), `100dvh`
