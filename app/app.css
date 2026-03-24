@@ -1,15 +1,98 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-dark-bg: #0A0E1A;
+  --color-dark-surface: #151B2D;
+  --color-dark-elevated: #1E2840;
+
+  --color-electric-blue: #00D9FF;
+  --color-electric-blue-dark: #0099CC;
+
+  --color-success: #00FF88;
+  --color-warning: #FFB800;
+  --color-danger: #FF3366;
+
+  --color-glass: rgba(21, 27, 45, 0.7);
+  --color-glass-light: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-dark-bg);
+  color: white;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+/* Glassmorphism utilities */
+@layer utilities {
+  .glass-panel {
+    background: var(--color-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   }
+
+  .glass-button {
+    background: var(--color-glass-light);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-button-active {
+    background: rgba(0, 217, 255, 0.15);
+    border-color: var(--color-electric-blue);
+    color: var(--color-electric-blue);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  }
+}
+
+/* Mapbox overrides */
+.mapboxgl-canvas {
+  outline: none;
+}
+
+.mapboxgl-ctrl-attrib {
+  display: none !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

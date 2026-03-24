@@ -1,0 +1,10 @@
+[
+  {"id":1,"position":[55.2744,25.1972],"capacity":12,"occupied":8,"type":"parking","name":"Burj Khalifa Station"},
+  {"id":2,"position":[55.2796,25.1985],"capacity":8,"occupied":3,"type":"charging","name":"Dubai Mall Charge"},
+  {"id":3,"position":[55.2680,25.2050],"capacity":15,"occupied":11,"type":"parking","name":"Downtown Hub"},
+  {"id":4,"position":[55.2820,25.2010],"capacity":6,"occupied":6,"type":"charging","name":"Business Bay Charge"},
+  {"id":5,"position":[55.2650,25.1990],"capacity":10,"occupied":4,"type":"parking","name":"DIFC Station"},
+  {"id":6,"position":[55.2770,25.2070],"capacity":8,"occupied":2,"type":"charging","name":"City Walk Charge"},
+  {"id":7,"position":[55.2860,25.2020],"capacity":12,"occupied":9,"type":"parking","name":"Creek Side Hub"},
+  {"id":8,"position":[55.2600,25.2060],"capacity":6,"occupied":1,"type":"charging","name":"Al Quoz Charge"}
+]
