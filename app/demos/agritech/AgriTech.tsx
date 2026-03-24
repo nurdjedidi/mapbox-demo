@@ -8,6 +8,7 @@ import { HeatmapLayer } from "./HeatmapLayer";
 import { WeatherStations, type WeatherStation } from "./WeatherStations";
 import { TractorRoute } from "./TractorRoute";
 import { AgriStatsPanel } from "./AgriStatsPanel";
+import { HideBoundariesLayer } from "./HideBoundariesLayer";
 import { CITIES } from "~/lib/mapbox/config";
 import farmsData from "~/data/mock-farms.json";
 
@@ -47,6 +48,7 @@ export function AgriTech() {
         bearing={cityConfig.bearing}
         style="mapbox://styles/mapbox/satellite-streets-v12"
       >
+        <HideBoundariesLayer />
         <FarmParcelsLayer
           parcels={parcels}
           selectedId={selectedParcelId}
@@ -65,7 +67,6 @@ export function AgriTech() {
       </MapContainer>
 
       <SidePanel title="AgriTech — Souss-Massa">
-        {/* Heatmap selector */}
         <div>
           <div className="flex items-center justify-between mb-2">
             <label className="text-xs text-white/40 uppercase tracking-wider">Couche analyse</label>
@@ -97,7 +98,6 @@ export function AgriTech() {
           </div>
         </div>
 
-        {/* Tractor route */}
         <div className="glass-panel p-3">
           <div className="flex items-center gap-2 mb-2">
             <Tractor size={13} className="text-eco-green" />
@@ -130,7 +130,6 @@ export function AgriTech() {
           </div>
         </div>
 
-        {/* Legend */}
         <div className="glass-panel p-3">
           <span className="text-xs text-white/40 uppercase tracking-wider block mb-2">Légende parcelles</span>
           <div className="space-y-1.5">
@@ -149,7 +148,6 @@ export function AgriTech() {
           <p className="text-[10px] text-white/25 mt-2">Hauteur 3D = rendement prévu (t/ha)</p>
         </div>
 
-        {/* Stats + alerts */}
         <AgriStatsPanel
           parcels={parcels}
           alerts={alerts}

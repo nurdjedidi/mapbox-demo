@@ -8,7 +8,6 @@ export interface Landmark {
 }
 
 export const LANDMARKS: Landmark[] = [
-  // Dubai
   { name: "Burj Khalifa", coords: [55.2744, 25.1972], icon: "tower", city: "dubai" },
   { name: "Dubai Mall", coords: [55.2796, 25.1985], icon: "shopping", city: "dubai" },
   { name: "Dubai Marina", coords: [55.1384, 25.0805], icon: "harbor", city: "dubai" },
@@ -22,7 +21,6 @@ export const LANDMARKS: Landmark[] = [
   { name: "Downtown Dubai", coords: [55.2708, 25.2048], icon: "city", city: "dubai" },
   { name: "Business Bay", coords: [55.2614, 25.1850], icon: "business", city: "dubai" },
 
-  // Casablanca
   { name: "Mosquee Hassan II", coords: [-7.6325, 33.6087], icon: "mosque", city: "casablanca" },
   { name: "Corniche Ain Diab", coords: [-7.6650, 33.5920], icon: "beach", city: "casablanca" },
   { name: "Ancienne Medina", coords: [-7.6113, 33.6005], icon: "historic", city: "casablanca" },

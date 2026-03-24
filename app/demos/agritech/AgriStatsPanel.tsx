@@ -34,7 +34,6 @@ export function AgriStatsPanel({ parcels, alerts, stats, selectedParcel, onClear
 
   return (
     <div className="flex flex-col gap-3">
-      {/* Main KPIs */}
       <div className="glass-panel p-4 border-eco-green/20">
         <div className="flex items-center gap-2 mb-3">
           <Leaf size={14} className="text-eco-green" />
@@ -52,7 +51,6 @@ export function AgriStatsPanel({ parcels, alerts, stats, selectedParcel, onClear
         </div>
       </div>
 
-      {/* Santé parcelles */}
       <div className="glass-panel p-3">
         <span className="text-xs text-white/40 uppercase tracking-wider block mb-3">Santé cultures</span>
         <div className="space-y-2">
@@ -65,7 +63,6 @@ export function AgriStatsPanel({ parcels, alerts, stats, selectedParcel, onClear
         </div>
       </div>
 
-      {/* Ressources */}
       <div className="grid grid-cols-2 gap-2">
         <div className="glass-panel p-3">
           <div className="flex items-center gap-1.5 mb-1">
@@ -83,7 +80,6 @@ export function AgriStatsPanel({ parcels, alerts, stats, selectedParcel, onClear
         </div>
       </div>
 
-      {/* Alertes */}
       {alerts.length > 0 && (
         <div className="glass-panel p-3">
           <div className="flex items-center gap-2 mb-2">
@@ -107,7 +103,6 @@ export function AgriStatsPanel({ parcels, alerts, stats, selectedParcel, onClear
         </div>
       )}
 
-      {/* Parcelle sélectionnée */}
       {selectedParcel && (
         <div className="glass-panel p-4 border border-white/20">
           <div className="flex items-start justify-between mb-3">

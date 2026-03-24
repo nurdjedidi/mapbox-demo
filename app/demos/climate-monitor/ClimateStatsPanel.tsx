@@ -1,4 +1,4 @@
-import { Wind, Droplets, Volume2, TrendingDown, Users, Download } from "lucide-react";
+import { Wind, Droplets, Volume2, TrendingDown, Users, Download, Factory } from "lucide-react";
 import { AnimatedNumber } from "~/components/shared/AnimatedNumber";
 
 interface YearData {
@@ -55,33 +55,46 @@ export function ClimateStatsPanel({
 }: ClimateStatsPanelProps) {
   const currentYear = yearlyData[String(year)];
   const pm25Active = scenario === "before" ? stats.before_factory_pm25 : (currentYear?.avg_pm25 ?? stats.after_factory_pm25);
+  const pm25Saved = stats.before_factory_pm25 - stats.after_factory_pm25;
 
   return (
     <div className="flex flex-col gap-3">
-      {/* Main KPIs */}
+      {/* Global health score */}
       <div className="glass-panel p-4 border-climate-blue/20">
         <div className="flex items-center gap-2 mb-3">
           <Wind size={14} className="text-climate-blue" />
-          <span className="text-xs text-white/40 uppercase tracking-wider">Surveillance Environnementale</span>
+          <span className="text-xs text-white/50 font-medium">Bilan environnemental</span>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           <div>
-            <AnimatedNumber value={stats.sensors_compliant_percent} decimals={0} suffix="%" className="text-2xl font-bold text-eco-green font-mono" />
-            <span className="text-xs text-white/40 block">Capteurs conformes</span>
+            <AnimatedNumber
+              value={stats.sensors_compliant_percent}
+              decimals={0}
+              suffix="%"
+              className="text-3xl font-bold text-eco-green font-mono"
+            />
+            <span className="text-xs text-white/40 block mt-0.5">des capteurs dans les normes</span>
           </div>
           <div>
-            <AnimatedNumber value={stats.population_exposed_pollution} decimals={0} className="text-2xl font-bold font-mono" />
-            <span className="text-xs text-white/40 block">Personnes exposées</span>
+            <AnimatedNumber
+              value={stats.population_exposed_pollution}
+              decimals={0}
+              className="text-3xl font-bold font-mono"
+            />
+            <span className="text-xs text-white/40 block mt-0.5">habitants exposés</span>
           </div>
         </div>
       </div>
 
-      {/* Timeline slider */}
+      {/* Timeline */}
       <div className="glass-panel p-3">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs text-white/40 uppercase tracking-wider">Évolution temporelle</span>
-          <span className="text-xs font-mono font-bold text-white/80">{year}</span>
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-xs text-white/50 font-medium">Évolution depuis 2020</span>
+          <span className="text-xs font-mono font-bold text-white">{year}</span>
         </div>
+        <p className="text-[10px] text-white/30 mb-2">
+          Faites glisser pour voir comment la pollution a changé au fil des ans.
+        </p>
         <input
           type="range"
           min={2020}
@@ -91,76 +104,90 @@ export function ClimateStatsPanel({
           onChange={(e) => onYearChange(Number(e.target.value))}
           className="w-full accent-climate-blue"
         />
-        <div className="flex justify-between text-[9px] text-white/30 mt-0.5">
-          <span>2020</span>
-          <span>2026</span>
+        <div className="flex justify-between text-[9px] text-white/30 mt-0.5 mb-2">
+          <span>2020 (pire)</span>
+          <span>2026 (actuel)</span>
         </div>
         {currentYear && (
-          <div className="grid grid-cols-2 gap-2 mt-2 text-xs">
-            <div className="text-center">
-              <span className="font-mono font-bold text-climate-blue">{currentYear.avg_pm25}</span>
-              <span className="text-white/30 block text-[9px]">PM2.5</span>
+          <div className="grid grid-cols-3 gap-2 text-xs text-center">
+            <div className="bg-white/5 rounded-lg py-1.5">
+              <span className="font-mono font-bold text-climate-blue block">{currentYear.avg_pm25}</span>
+              <span className="text-[9px] text-white/30">Air (PM2.5)</span>
             </div>
-            <div className="text-center">
-              <span className="font-mono font-bold text-eco-green">{currentYear.compliant_percent}%</span>
-              <span className="text-white/30 block text-[9px]">Conformité</span>
+            <div className="bg-white/5 rounded-lg py-1.5">
+              <span className="font-mono font-bold text-climate-blue block">{currentYear.avg_nitrates}</span>
+              <span className="text-[9px] text-white/30">Eau (NO₃)</span>
+            </div>
+            <div className="bg-white/5 rounded-lg py-1.5">
+              <span className="font-mono font-bold text-eco-green block">{currentYear.compliant_percent}%</span>
+              <span className="text-[9px] text-white/30">Conformes</span>
             </div>
           </div>
         )}
       </div>
 
-      {/* Before/After scenario */}
+      {/* Before/After factory */}
       <div className="glass-panel p-3">
-        <span className="text-xs text-white/40 uppercase tracking-wider block mb-2">Scénario — Fermeture usine</span>
-        <div className="grid grid-cols-2 gap-2 mb-3">
+        <div className="flex items-center gap-2 mb-1">
+          <Factory size={13} className="text-agri-amber" />
+          <span className="text-xs text-white/50 font-medium">Impact fermeture usine</span>
+        </div>
+        <p className="text-[10px] text-white/30 mb-2">
+          Comparez la pollution avant et après la fermeture de l'usine industrielle.
+        </p>
+        <div className="grid grid-cols-2 gap-2 mb-2">
           <button
             onClick={() => onScenarioChange("before")}
-            className={`py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`py-2 rounded-lg text-xs font-medium transition-all ${
               scenario === "before"
                 ? "bg-danger/15 border border-danger/40 text-danger"
                 : "glass-button text-white/40"
             }`}
           >
-            Avant
+            Usine ouverte
           </button>
           <button
             onClick={() => onScenarioChange("after")}
-            className={`py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`py-2 rounded-lg text-xs font-medium transition-all ${
               scenario === "after"
                 ? "bg-eco-green/15 border border-eco-green/40 text-eco-green"
                 : "glass-button text-white/40"
             }`}
           >
-            Après
+            Usine fermée
           </button>
         </div>
-        <div className="flex items-center gap-2 text-xs">
-          <TrendingDown size={11} className="text-eco-green" />
-          <span>PM2.5 :</span>
-          <span className="font-mono font-bold">{pm25Active} µg/m³</span>
-          {scenario === "after" && (
-            <span className="text-eco-green text-[10px]">
-              (−{stats.before_factory_pm25 - stats.after_factory_pm25} µg/m³)
-            </span>
-          )}
+        <div className="flex items-center justify-between text-xs bg-white/5 rounded-lg px-3 py-2">
+          <span className="text-white/50">Pollution air :</span>
+          <div className="flex items-center gap-2">
+            <span className="font-mono font-bold">{pm25Active} µg/m³</span>
+            {scenario === "after" && (
+              <span className="flex items-center gap-0.5 text-eco-green text-[10px] font-semibold">
+                <TrendingDown size={10} />
+                −{pm25Saved}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Water + noise KPIs */}
+      {/* Water + zones */}
       <div className="grid grid-cols-2 gap-2">
         <div className="glass-panel p-3">
           <div className="flex items-center gap-1.5 mb-1">
             <Droplets size={12} className="text-climate-blue" />
-            <span className="text-xs text-white/40">Qualité eau</span>
+            <span className="text-xs text-white/40">Eau potable</span>
           </div>
-          <AnimatedNumber value={stats.water_quality_index} decimals={0} suffix="/100" className="text-lg font-bold text-climate-blue font-mono" />
+          <AnimatedNumber value={stats.water_quality_index} decimals={0} suffix="/100" className="text-xl font-bold text-climate-blue font-mono" />
+          <span className="text-[9px] text-white/25 block mt-0.5">indice qualité</span>
         </div>
         <div className="glass-panel p-3">
           <div className="flex items-center gap-1.5 mb-1">
             <Volume2 size={12} className="text-agri-amber" />
-            <span className="text-xs text-white/40">{'Zones >seuil'}</span>
+            <span className="text-xs text-white/40">Zones en alerte</span>
           </div>
-          <AnimatedNumber value={stats.zones_exceeding} decimals={0} className="text-lg font-bold text-agri-amber font-mono" />
+          <AnimatedNumber value={stats.zones_exceeding} decimals={0} className="text-xl font-bold text-agri-amber font-mono" />
+          <span className="text-[9px] text-white/25 block mt-0.5">dépassent les seuils</span>
         </div>
       </div>
 
@@ -169,16 +196,30 @@ export function ClimateStatsPanel({
         <div className="glass-panel p-3">
           <div className="flex items-center gap-2 mb-2">
             <Users size={13} className="text-agri-amber" />
-            <span className="text-xs text-white/40 uppercase tracking-wider">Zones à risque</span>
+            <span className="text-xs text-white/50 font-medium">Zones à risque climatique</span>
           </div>
           <div className="space-y-2">
             {riskZones.map((z, i) => (
-              <div key={i} className={`p-2 rounded-lg border text-xs ${z.type === "flood" ? "border-climate-blue/30 bg-climate-blue/8" : "border-agri-amber/30 bg-agri-amber/8"}`}>
-                <div className="flex items-center gap-1.5 mb-0.5">
-                  <div className={`w-1.5 h-1.5 rounded-full ${z.type === "flood" ? "bg-climate-blue" : "bg-agri-amber"}`} />
-                  <span className="font-semibold text-white/80">{z.name}</span>
+              <div
+                key={i}
+                className={`p-2.5 rounded-lg border text-xs ${
+                  z.type === "flood"
+                    ? "border-climate-blue/30 bg-climate-blue/8"
+                    : "border-agri-amber/30 bg-agri-amber/8"
+                }`}
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-lg">{z.type === "flood" ? "🌊" : "🏜️"}</span>
+                  <div>
+                    <span className="font-semibold text-white/80 block leading-tight">{z.name}</span>
+                    <span className={`text-[10px] ${z.type === "flood" ? "text-climate-blue" : "text-agri-amber"}`}>
+                      {z.type === "flood" ? "Risque inondation" : "Risque sécheresse"}
+                    </span>
+                  </div>
                 </div>
-                <p className="text-white/40 text-[10px]">{z.population_exposed.toLocaleString()} hab. exposés</p>
+                <p className="text-white/45 text-[10px]">
+                  {z.population_exposed.toLocaleString()} habitants exposés
+                </p>
                 <p className="text-white/30 text-[10px] mt-0.5 leading-relaxed">{z.measures}</p>
               </div>
             ))}
@@ -186,13 +227,13 @@ export function ClimateStatsPanel({
         </div>
       )}
 
-      {/* Export button */}
+      {/* Export */}
       <button
         onClick={() => exportCSV(stats, yearlyData)}
         className="flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-medium glass-button text-white/60 hover:text-white hover:bg-white/10 transition-all"
       >
         <Download size={12} />
-        Export rapport ESG (.csv)
+        Télécharger rapport ESG (.csv)
       </button>
     </div>
   );

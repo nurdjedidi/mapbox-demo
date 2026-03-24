@@ -54,7 +54,7 @@ export const DEFAULT_ZOOM = 13;
 export const DEFAULT_PITCH = 60;
 export const DEFAULT_BEARING = -17.6;
 
-export const ANIMATION_DURATION = 15000; // 15s for immersive drive animation
+export const ANIMATION_DURATION = 15000;
 export const ROUTE_LINE_WIDTH = 4;
 export const ROUTE_COLOR = "#00D9FF";
 export const ROUTE_ALT_COLOR = "#FFB800";

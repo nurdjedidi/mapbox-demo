@@ -15,7 +15,7 @@ interface MapContainerProps {
   pitch?: number;
   bearing?: number;
   style?: string;
-  onLoad?: (map: mapboxgl.Map) => void;
+  onLoad?: (map: mapboxgl.Map) => void; 
   className?: string;
   children?: ReactNode;
 }
@@ -55,7 +55,6 @@ export function MapContainer({
       });
 
       mapInstance.on("load", () => {
-        // For non-standard styles, add 3D buildings manually
         const isStandardStyle = style.includes("standard");
         if (!isStandardStyle) {
           const layers = mapInstance.getStyle().layers;
