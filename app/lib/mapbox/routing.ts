@@ -1,4 +1,8 @@
+import mapboxgl from "mapbox-gl";
 import { MAPBOX_TOKEN } from "./config";
+
+mapboxgl.accessToken = MAPBOX_TOKEN;
+console.log("Token chargé :", MAPBOX_TOKEN);
 
 export interface RouteOptions {
   profile?: "driving" | "walking" | "cycling" | "driving-traffic";
