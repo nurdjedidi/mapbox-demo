@@ -7,6 +7,7 @@ import { SensorsLayer, SensorDetail, type Sensor } from "./SensorsLayer";
 import { PollutionHeatmap } from "./PollutionHeatmap";
 import { RiskZones, type RiskZone } from "./RiskZones";
 import { ClimateStatsPanel } from "./ClimateStatsPanel";
+import { HideBoundariesLayer } from "~/components/map/HideBoundariesLayer";
 import { CITIES } from "~/lib/mapbox/config";
 import sensorsData from "~/data/mock-sensors.json";
 
@@ -47,6 +48,7 @@ export function ClimateMonitor() {
         pitch={cityConfig.pitch}
         bearing={cityConfig.bearing}
       >
+        <HideBoundariesLayer />
         <PollutionHeatmap sensors={sensors} type={pollutionType} year={year} />
         <SensorsLayer
           sensors={sensors}

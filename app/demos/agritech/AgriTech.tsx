@@ -8,7 +8,7 @@ import { HeatmapLayer } from "./HeatmapLayer";
 import { WeatherStations, type WeatherStation } from "./WeatherStations";
 import { TractorRoute } from "./TractorRoute";
 import { AgriStatsPanel } from "./AgriStatsPanel";
-import { HideBoundariesLayer } from "./HideBoundariesLayer";
+import { HideBoundariesLayer } from "~/components/map/HideBoundariesLayer";
 import { CITIES } from "~/lib/mapbox/config";
 import farmsData from "~/data/mock-farms.json";
 

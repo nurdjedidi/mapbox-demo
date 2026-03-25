@@ -7,6 +7,7 @@ import { VehicleLayer, type FleetVehicle } from "./VehicleLayer";
 import { ChargingStations, type ChargingStation } from "./ChargingStations";
 import { LEZones, type LEZone } from "./LEZones";
 import { CarbonStats } from "./CarbonStats";
+import { HideBoundariesLayer } from "~/components/map/HideBoundariesLayer";
 import { CITIES } from "~/lib/mapbox/config";
 import fleetData from "~/data/mock-fleet-eco.json";
 
@@ -36,6 +37,7 @@ export function GreenFleet() {
         pitch={cityConfig.pitch}
         bearing={cityConfig.bearing}
       >
+        <HideBoundariesLayer />
         <VehicleLayer
           vehicles={vehicles}
           isPlaying={isPlaying}
