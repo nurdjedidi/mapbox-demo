@@ -19,9 +19,17 @@ export interface CityConfig {
   description: string;
 }
 
-export type CityKey = "dubai" | "casablanca" | "agadir";
+export type CityKey = "dubai" | "casablanca" | "agadir" | "akbou";
 
 export const CITIES: Record<CityKey, CityConfig> = {
+  akbou: {
+    name: "Akbou",
+    center: [4.5397, 36.4554],
+    zoom: 9.2,
+    pitch: 55,
+    bearing: 10,
+    description: "Vallée de la Soummam — collecte laitière montagnes kabyles",
+  },
   agadir: {
     name: "Agadir",
     center: [-9.47, 30.36],

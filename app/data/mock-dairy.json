@@ -1,0 +1,136 @@
+{
+  "akbouHub": {
+    "id": "akbou_hub",
+    "name": "Soummam · Akbou Hub",
+    "coordinates": [4.5397, 36.4554],
+    "capacity_liters": 50000,
+    "currentVolume_liters": 32400,
+    "daily_target_liters": 45000
+  },
+  "stats": {
+    "total_daily_liters": 14890,
+    "cold_chain_compliance_pct": 87,
+    "fuel_saving_pct": 12,
+    "active_tankers": 8,
+    "collection_points_active": 15
+  },
+  "collectionPoints": [
+    {
+      "id": "cp_01", "name": "Ferme Ath Mansour",
+      "coordinates": [4.283, 36.582],
+      "volume_liters": 850, "status": "cold_ok", "temp_celsius": 3.2, "altitude_m": 842
+    },
+    {
+      "id": "cp_02", "name": "Coopérative Chemini",
+      "coordinates": [4.352, 36.524],
+      "volume_liters": 1200, "status": "cold_ok", "temp_celsius": 3.9, "altitude_m": 680
+    },
+    {
+      "id": "cp_03", "name": "Ferme Aokas",
+      "coordinates": [4.698, 36.648],
+      "volume_liters": 650, "status": "temp_warning", "temp_celsius": 5.4, "altitude_m": 310
+    },
+    {
+      "id": "cp_04", "name": "Collecte Tichy",
+      "coordinates": [4.772, 36.628],
+      "volume_liters": 920, "status": "cold_ok", "temp_celsius": 4.1, "altitude_m": 120
+    },
+    {
+      "id": "cp_05", "name": "Ferme Tazmalt",
+      "coordinates": [4.402, 36.381],
+      "volume_liters": 2100, "status": "critical_delay", "temp_celsius": 7.8, "altitude_m": 590
+    },
+    {
+      "id": "cp_06", "name": "Coopérative Sidi Aich",
+      "coordinates": [4.631, 36.498],
+      "volume_liters": 1450, "status": "cold_ok", "temp_celsius": 3.6, "altitude_m": 230
+    },
+    {
+      "id": "cp_07", "name": "Ferme Timezrit",
+      "coordinates": [3.952, 36.548],
+      "volume_liters": 780, "status": "cold_ok", "temp_celsius": 3.8, "altitude_m": 920
+    },
+    {
+      "id": "cp_08", "name": "Collecte Kherrata",
+      "coordinates": [5.148, 36.520],
+      "volume_liters": 430, "status": "temp_warning", "temp_celsius": 6.1, "altitude_m": 450
+    },
+    {
+      "id": "cp_09", "name": "Ferme Ighil Ali",
+      "coordinates": [4.848, 36.382],
+      "volume_liters": 1100, "status": "cold_ok", "temp_celsius": 4.0, "altitude_m": 740
+    },
+    {
+      "id": "cp_10", "name": "Coopérative Amizour",
+      "coordinates": [4.901, 36.640],
+      "volume_liters": 960, "status": "cold_ok", "temp_celsius": 3.5, "altitude_m": 190
+    },
+    {
+      "id": "cp_11", "name": "Ferme Béni Maouche",
+      "coordinates": [4.468, 36.302],
+      "volume_liters": 1800, "status": "critical_delay", "temp_celsius": 8.3, "altitude_m": 810
+    },
+    {
+      "id": "cp_12", "name": "Collecte Ouzellaguen",
+      "coordinates": [4.726, 36.472],
+      "volume_liters": 1340, "status": "cold_ok", "temp_celsius": 3.7, "altitude_m": 280
+    },
+    {
+      "id": "cp_13", "name": "Ferme Souk Oufella",
+      "coordinates": [4.582, 36.602],
+      "volume_liters": 570, "status": "temp_warning", "temp_celsius": 5.9, "altitude_m": 520
+    },
+    {
+      "id": "cp_14", "name": "Coopérative Adekar",
+      "coordinates": [4.519, 36.718],
+      "volume_liters": 890, "status": "cold_ok", "temp_celsius": 4.2, "altitude_m": 360
+    },
+    {
+      "id": "cp_15", "name": "Ferme Akfadou",
+      "coordinates": [4.172, 36.598],
+      "volume_liters": 1050, "status": "cold_ok", "temp_celsius": 3.4, "altitude_m": 1180
+    }
+  ],
+  "tankers": [
+    {
+      "id": "TK-01", "name": "Citerne Soummam 1",
+      "temp_celsius": 3.8, "fill_pct": 85,
+      "route": [[4.283, 36.582], [4.31, 36.56], [4.352, 36.524], [4.40, 36.50], [4.42, 36.488], [4.48, 36.47], [4.5397, 36.4554]]
+    },
+    {
+      "id": "TK-02", "name": "Citerne Soummam 2",
+      "temp_celsius": 4.1, "fill_pct": 72,
+      "route": [[4.402, 36.381], [4.42, 36.39], [4.44, 36.41], [4.47, 36.43], [4.49, 36.44], [4.51, 36.45], [4.5397, 36.4554]]
+    },
+    {
+      "id": "TK-03", "name": "Citerne Soummam 3",
+      "temp_celsius": 3.5, "fill_pct": 91,
+      "route": [[4.631, 36.498], [4.61, 36.49], [4.59, 36.48], [4.57, 36.47], [4.55, 36.46], [4.5397, 36.4554]]
+    },
+    {
+      "id": "TK-04", "name": "Citerne Soummam 4",
+      "temp_celsius": 4.3, "fill_pct": 68,
+      "route": [[4.772, 36.628], [4.75, 36.61], [4.72, 36.60], [4.70, 36.598], [4.68, 36.56], [4.645, 36.525], [4.61, 36.49], [4.57, 36.475], [4.5397, 36.4554]]
+    },
+    {
+      "id": "TK-05", "name": "Citerne Soummam 5",
+      "temp_celsius": 3.9, "fill_pct": 78,
+      "route": [[5.148, 36.520], [5.05, 36.515], [4.990, 36.510], [4.90, 36.505], [4.80, 36.498], [4.70, 36.495], [4.65, 36.490], [4.58, 36.47], [4.5397, 36.4554]]
+    },
+    {
+      "id": "TK-06", "name": "Citerne Soummam 6",
+      "temp_celsius": 4.0, "fill_pct": 83,
+      "route": [[4.848, 36.382], [4.80, 36.40], [4.748, 36.418], [4.68, 36.435], [4.62, 36.452], [4.58, 36.45], [4.5397, 36.4554]]
+    },
+    {
+      "id": "TK-07", "name": "Citerne Soummam 7",
+      "temp_celsius": 3.7, "fill_pct": 64,
+      "route": [[4.582, 36.602], [4.575, 36.58], [4.568, 36.552], [4.56, 36.52], [4.555, 36.502], [4.545, 36.48], [4.5397, 36.4554]]
+    },
+    {
+      "id": "TK-08", "name": "Citerne Soummam 8",
+      "temp_celsius": 4.2, "fill_pct": 89,
+      "route": [[4.172, 36.598], [4.21, 36.58], [4.252, 36.558], [4.30, 36.54], [4.352, 36.514], [4.40, 36.49], [4.448, 36.482], [4.50, 36.47], [4.5397, 36.4554]]
+    }
+  ]
+}

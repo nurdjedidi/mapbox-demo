@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useMap } from "~/lib/hooks/useMap";
+import { getMapboxGL } from "~/lib/mapbox/mapboxSingleton";
 
 interface TractorRouteProps {
   waypoints: [number, number][];
@@ -89,7 +90,7 @@ export function TractorRoute({ waypoints, isPlaying, onStop }: TractorRouteProps
       paint: { "line-color": "#22C55E", "line-width": 4, "line-opacity": 0.85 },
     });
 
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       const el = createTractorEl();
       markerRef.current = new mapboxgl.Marker({ element: el, rotationAlignment: "map", pitchAlignment: "map" })
         .setLngLat(waypoints[0])

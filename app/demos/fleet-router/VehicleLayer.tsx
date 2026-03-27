@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useMap } from "~/lib/hooks/useMap";
+import { getMapboxGL } from "~/lib/mapbox/mapboxSingleton";
 
 export interface FleetVehicle {
   id: number;
@@ -90,7 +91,7 @@ export function VehicleLayer({ vehicles, isPlaying, speed, onProgress }: Vehicle
 
     const markerCleanups: (() => void)[] = [];
 
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       vehicles.forEach((vehicle) => {
         const routeCoords = vehicle.route ?? vehicle.waypoints;
         const routeSourceId = `fleet-route-${vehicle.id}`;

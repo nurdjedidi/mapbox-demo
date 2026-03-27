@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useMap } from "~/lib/hooks/useMap";
+import { getMapboxGL } from "~/lib/mapbox/mapboxSingleton";
 
 export interface FleetVehicle {
   id: number;
@@ -117,7 +118,7 @@ export function VehicleLayer({ vehicles, isPlaying, speed, onProgress }: Vehicle
   useEffect(() => {
     if (!map) return;
 
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       // Remove old
       markersRef.current.forEach((m) => m.remove());
       markersRef.current = [];

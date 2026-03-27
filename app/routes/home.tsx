@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Sprout, Leaf, Wind, ArrowRight } from "lucide-react";
+import { Sprout, Leaf, Wind, Milk, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const DEMOS = [
@@ -36,11 +36,22 @@ const DEMOS = [
     city: "Casablanca",
     badge: "ClimaTech",
   },
+  {
+    to: "/dairy-logistics",
+    title: "Dairy Logistics 3D",
+    description: "Collecte laitière montagnarde en 3D. 15 centres de collecte, 8 citernes animées, terrain Kabyle RGB et cold chain en temps réel.",
+    icon: Milk,
+    gradient: "from-climate-blue/15 to-agri-amber/10",
+    borderColor: "border-climate-blue/25",
+    iconColor: "text-climate-blue",
+    city: "Vallée Soummam · Akbou",
+    badge: "Agro-Industrie",
+  },
 ];
 
 export function meta() {
   return [
-    { title: "ImpactMap — AgriTech · Green Fleet · Climate Monitor" },
+    { title: "ImpactMap — AgriTech · Green Fleet · Climate Monitor · Dairy Logistics" },
     { name: "description", content: "Démos cartographiques orientées impact environnemental" },
   ];
 }
@@ -73,17 +84,18 @@ export default function Home() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full relative z-10">
         {DEMOS.map((demo, idx) => (
           <motion.div
             key={demo.to}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 + idx * 0.15 }}
+            className="h-full"
           >
             <Link
               to={demo.to}
-              className={`group block glass-panel p-6 hover:scale-[1.02] transition-all duration-300 bg-gradient-to-br ${demo.gradient} border ${demo.borderColor}`}
+              className={`group flex flex-col h-full glass-panel p-6 hover:scale-[1.02] transition-all duration-300 bg-gradient-to-br ${demo.gradient} border ${demo.borderColor}`}
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -99,8 +111,8 @@ export default function Home() {
                   {demo.badge}
                 </span>
               </div>
-              <p className="text-sm text-white/50 mb-6 leading-relaxed">{demo.description}</p>
-              <div className="flex items-center gap-2 text-sm text-white/40 group-hover:text-white/70 transition-colors">
+              <p className="text-sm text-white/50 mb-6 leading-relaxed flex-1">{demo.description}</p>
+              <div className="flex items-center gap-2 text-sm text-white/40 group-hover:text-white/70 transition-colors mt-auto">
                 <span>Explorer la démo</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </div>

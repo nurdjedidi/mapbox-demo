@@ -5,4 +5,5 @@ export default [
   route("agritech", "routes/agritech.tsx"),
   route("green-fleet", "routes/green-fleet.tsx"),
   route("climate-monitor", "routes/climate-monitor.tsx"),
+  route("dairy-logistics", "routes/dairy-logistics.tsx"),
 ] satisfies RouteConfig;

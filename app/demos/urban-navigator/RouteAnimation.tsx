@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useMap } from "~/lib/hooks/useMap";
 import { ROUTE_COLOR, ROUTE_ALT_COLOR, ROUTE_LINE_WIDTH, ANIMATION_DURATION } from "~/lib/mapbox/config";
+import { getMapboxGL } from "~/lib/mapbox/mapboxSingleton";
 import type { RouteData } from "~/lib/mapbox/routing";
 
 interface RouteAnimationProps {
@@ -120,7 +121,7 @@ export function RouteAnimation({ routes, selectedIndex, isAnimating, onAnimation
     });
 
     // Fit bounds
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       const coords = routes[selectedIndex].geometry.coordinates;
       const bounds = new mapboxgl.LngLatBounds();
       coords.forEach((coord) => bounds.extend(coord as [number, number]));
@@ -160,7 +161,7 @@ export function RouteAnimation({ routes, selectedIndex, isAnimating, onAnimation
     };
 
     // Create vehicle marker
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       // Vehicle marker element
       const el = document.createElement("div");
       el.style.width = "20px";

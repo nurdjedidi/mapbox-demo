@@ -1,11 +1,12 @@
 import { Link, useLocation } from "react-router";
-import { Home, Sprout, Leaf, Wind } from "lucide-react";
+import { Home, Sprout, Leaf, Wind, Milk } from "lucide-react";
 
 const NAV_ITEMS = [
   { to: "/", label: "Home", icon: Home },
   { to: "/agritech", label: "AgriTech", icon: Sprout },
   { to: "/green-fleet", label: "Fleet", icon: Leaf },
   { to: "/climate-monitor", label: "Climat", icon: Wind },
+  { to: "/dairy-logistics", label: "Dairy", icon: Milk },
 ];
 
 export function Navbar() {

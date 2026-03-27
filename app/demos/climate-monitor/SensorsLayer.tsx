@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useMap } from "~/lib/hooks/useMap";
+import { getMapboxGL } from "~/lib/mapbox/mapboxSingleton";
 
 export interface Sensor {
   id: number;
@@ -89,7 +90,7 @@ export function SensorsLayer({ sensors, activeType, onSelect }: SensorsLayerProp
 
     const filtered = sensors.filter((s) => s.type === activeType);
 
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       const markers = filtered.map((s) => {
         const el = createSensorEl(s, () => onSelect?.(s));
         return new mapboxgl.Marker({ element: el, anchor: "center" })

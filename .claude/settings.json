@@ -4,7 +4,15 @@
       "Bash(npm install:*)",
       "Bash(npx react-router:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(npm show:*)",
+      "Bash(npm whoami:*)",
+      "Bash(npm pack:*)",
+      "Bash(npm version:*)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\djedi\\Documents\\.vscode\\mapbox-demo\\app\\components\\map",
+      "c:\\Users\\djedi\\Documents\\.vscode\\mapbox-demo\\packages\\mapbox-gl-worldview"
     ]
   }
 }

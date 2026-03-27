@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useMap } from "~/lib/hooks/useMap";
+import { getMapboxGL } from "~/lib/mapbox/mapboxSingleton";
 
 export interface Customer {
   id: number;
@@ -85,7 +86,7 @@ export function CustomerLayer({ customers, onSelect, selectedId, showDeadZones }
     markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
 
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       const markers = customers.map((c) => {
         const el = createMarkerEl(c, c.id === selectedId);
         el.onclick = () => onSelect(c.id);

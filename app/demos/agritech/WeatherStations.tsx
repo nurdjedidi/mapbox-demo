@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useMap } from "~/lib/hooks/useMap";
+import { getMapboxGL } from "~/lib/mapbox/mapboxSingleton";
 
 export interface WeatherStation {
   id: number;
@@ -76,7 +77,7 @@ export function WeatherStations({ stations }: WeatherStationsProps) {
     markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
 
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       const markers = stations.map((s) => {
         const el = createStationMarker(s);
         return new mapboxgl.Marker({ element: el, anchor: "bottom" })

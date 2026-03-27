@@ -10,33 +10,63 @@ export function HideBoundariesLayer() {
     function applyOverrides() {
       if (!map) return;
 
-      map.getStyle().layers?.forEach((layer) => {
-        if (layer.id.toLowerCase().includes("disputed")) {
+      const layers = map.getStyle().layers || [];
+      const styleName = map.getStyle().name?.toLowerCase() || "";
+      const isStandardStyle = styleName.includes("standard") || 
+        (map.getStyle().metadata as any)?.["mapbox:origin"] === "standard";
+      const WORLDVIEW = "MA";
+
+      // 1. Pour le style Standard -> Désactiver les frontières dans la config du basemap
+      if (isStandardStyle) {
+        try {
+          (map as any).setConfigProperty?.("basemap", "showAdminBoundaries", false);
+          (map as any).setConfigProperty?.("basemap", "showRoadLabels", true);
+        } catch (e) {}
+      }
+
+      // 2. Parcourir toutes les couches pour appliquer le Worldview et les filtres de sécurité
+      layers.forEach((layer) => {
+        const id = layer.id.toLowerCase();
+        const isAdminOrBoundary = id.includes('admin') || id.includes('boundary') || id.includes('disputed');
+        const isCountryLabel = id.includes('country-label') || id.includes('place-label-country');
+
+        if (isAdminOrBoundary || isCountryLabel) {
           try {
-            map.setLayoutProperty(layer.id, "visibility", "none");
-          } catch {}
+            // Filtre par worldview (Méthode officielle)
+            const worldviewFilter = [
+              "match",
+              ["get", "worldview"],
+              ["all", WORLDVIEW],
+              true,
+              false
+            ];
+
+            // On combine avec les filtres existants et l'exclusion EH/Israel
+            const excludes = [
+              ["!=", ["get", "name_en"], "Israel"],
+              ["!=", ["get", "name_en"], "Western Sahara"],
+              ["!=", ["get", "name_en"], "W. Sahara"],
+              ["!=", ["get", "iso_3166_1"], "EH"],
+              ["!=", ["get", "iso_3166_1_l"], "EH"],
+            ];
+
+            const existingFilter = map!.getFilter(layer.id) || ["all"];
+            map!.setFilter(layer.id, [
+              "all",
+              existingFilter,
+              worldviewFilter,
+              ...excludes
+            ] as any);
+
+            // Pour les frontières, on force aussi le masquage si nécessaire
+            if (isAdminOrBoundary && id.includes('disputed')) {
+              map!.setLayoutProperty(layer.id, "visibility", "none");
+            }
+          } catch (e) {}
         }
       });
 
-      try {
-        if (map.getLayer("country-label")) {
-          const existing = map.getFilter("country-label");
-          let newFilter: any;
-          const excludes = [
-            ["!=", ["get", "name_en"], "Israel"],
-            ["!=", ["get", "name_en"], "Western Sahara"],
-          ];
-          if (Array.isArray(existing) && existing[0] === "all") {
-            newFilter = [...existing, ...excludes];
-          } else if (existing) {
-            newFilter = ["all", existing, ...excludes];
-          } else {
-            newFilter = ["all", ...excludes];
-          }
-          map.setFilter("country-label", newFilter);
-        }
-      } catch {}
-
+      // 3. Label PALESTINE (Style de ton snippet)
       try {
         if (!map.getSource("_palestine-src")) {
           map.addSource("_palestine-src", {
@@ -59,12 +89,8 @@ export function HideBoundariesLayer() {
               "text-field": "PALESTINE",
               "text-font": ["DIN Pro Bold", "Arial Unicode MS Bold"],
               "text-size": [
-                "interpolate",
-                ["linear"],
-                ["zoom"],
-                2, 11,
-                5, 15,
-                7, 17,
+                "interpolate", ["linear"], ["zoom"],
+                2, 11, 5, 15, 7, 17,
               ],
               "text-letter-spacing": 0.12,
             },
@@ -72,12 +98,8 @@ export function HideBoundariesLayer() {
               "text-color": "#ACBCD2",
               "text-halo-width": 0,
               "text-opacity": [
-                "interpolate",
-                ["linear"],
-                ["zoom"],
-                2, 0.8,
-                6.5, 0.8,
-                7, 0,
+                "interpolate", ["linear"], ["zoom"],
+                2, 0.8, 6.5, 0.8, 7, 0,
               ],
             },
           });
@@ -92,9 +114,7 @@ export function HideBoundariesLayer() {
     }
 
     return () => {
-      try {
-        map.off("styledata", applyOverrides);
-      } catch {}
+      try { map.off("styledata", applyOverrides); } catch {}
     };
   }, [map]);
 

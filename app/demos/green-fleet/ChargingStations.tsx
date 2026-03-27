@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useMap } from "~/lib/hooks/useMap";
+import { getMapboxGL } from "~/lib/mapbox/mapboxSingleton";
 
 export interface ChargingStation {
   id: number;
@@ -76,7 +77,7 @@ export function ChargingStations({ stations, lowBatteryPositions = [] }: Chargin
     markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
 
-    import("mapbox-gl").then(({ default: mapboxgl }) => {
+    getMapboxGL().then(({ default: mapboxgl }) => {
       const markers = stations.map((s) => {
         const highlight = lowBatteryPositions.some((pos) => isNear(s.position, pos));
         const el = createStationMarker(s, highlight);
