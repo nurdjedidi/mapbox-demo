@@ -12,9 +12,9 @@ export interface CollectionPoint {
 }
 
 const STATUS_COLORS: Record<CollectionPoint["status"], string> = {
-  cold_ok: "#3B82F6",
-  temp_warning: "#D97706",
-  critical_delay: "#FF3366",
+  cold_ok: "#22D3EE",
+  temp_warning: "#F97316",
+  critical_delay: "#FF1744",
 };
 
 const STATUS_LABELS: Record<CollectionPoint["status"], string> = {
@@ -23,17 +23,18 @@ const STATUS_LABELS: Record<CollectionPoint["status"], string> = {
   critical_delay: "Retard critique",
 };
 
-function makeSquarePolygon(
+/** 32-sided polygon approximating a circle (cylinder base) */
+function makeCirclePolygon(
   [lng, lat]: [number, number],
-  halfDeg = 0.0006 
+  radiusDeg = 0.0008,
+  sides = 32
 ): [number, number][][] {
-  return [[
-    [lng - halfDeg, lat - halfDeg],
-    [lng + halfDeg, lat - halfDeg],
-    [lng + halfDeg, lat + halfDeg],
-    [lng - halfDeg, lat + halfDeg],
-    [lng - halfDeg, lat - halfDeg],
-  ]];
+  const coords: [number, number][] = [];
+  for (let i = 0; i <= sides; i++) {
+    const angle = (i / sides) * 2 * Math.PI;
+    coords.push([lng + radiusDeg * Math.cos(angle), lat + radiusDeg * Math.sin(angle)]);
+  }
+  return [coords];
 }
 
 interface CollectionPointsLayerProps {
@@ -47,13 +48,16 @@ export function CollectionPointsLayer({ points, onHover }: CollectionPointsLayer
   useEffect(() => {
     if (!map || points.length === 0) return;
 
-    const SOURCE_ID = "collection-points-extrusion";
-    const LAYER_ID = "collection-points-towers";
-    const GLOW_ID = "collection-points-glow";
-    const ICON_LAYER_ID = "collection-points-icons";
-    const TOP_HIGHLIGHT_ID = "collection-points-top";
+    const POLY_SOURCE = "cp-poly-src";
+    const PT_SOURCE = "cp-pt-src";
+    const GLOW_OUTER = "cp-glow-outer";
+    const GLOW_MID = "cp-glow-mid";
+    const GLOW_INNER = "cp-glow-inner";
+    const CYLINDER_ID = "cp-cylinders";
+    const CAP_ID = "cp-caps";
+    const LABEL_ID = "cp-labels";
 
-    const geojson: GeoJSON.FeatureCollection = {
+    const polyGeoJSON: GeoJSON.FeatureCollection = {
       type: "FeatureCollection",
       features: points.map((p) => ({
         type: "Feature",
@@ -63,113 +67,146 @@ export function CollectionPointsLayer({ points, onHover }: CollectionPointsLayer
           volume: p.volume_liters,
           status: p.status,
           color: STATUS_COLORS[p.status],
-          height: Math.round(p.volume_liters / 2.5),
+          height: Math.round(p.volume_liters / 1.8),
           temp: p.temp_celsius,
-          altitude: p.altitude_m,
         },
         geometry: {
           type: "Polygon",
-          coordinates: makeSquarePolygon(p.coordinates),
+          coordinates: makeCirclePolygon(p.coordinates),
         },
       })),
     };
 
-    // Cleanup before adding
+    const ptGeoJSON: GeoJSON.FeatureCollection = {
+      type: "FeatureCollection",
+      features: points.map((p) => ({
+        type: "Feature",
+        properties: {
+          id: p.id,
+          color: STATUS_COLORS[p.status],
+          volume: p.volume_liters,
+        },
+        geometry: { type: "Point", coordinates: p.coordinates },
+      })),
+    };
+
+    // Cleanup
+    const layers = [GLOW_OUTER, GLOW_MID, GLOW_INNER, CYLINDER_ID, CAP_ID, LABEL_ID];
+    const sources = [POLY_SOURCE, PT_SOURCE];
     try {
-      if (map.getLayer(LAYER_ID)) map.removeLayer(LAYER_ID);
-      if (map.getLayer(GLOW_ID)) map.removeLayer(GLOW_ID);
-      if (map.getLayer(TOP_HIGHLIGHT_ID)) map.removeLayer(TOP_HIGHLIGHT_ID);
-      if (map.getLayer(ICON_LAYER_ID)) map.removeLayer(ICON_LAYER_ID);
-      if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
-    } catch (e) {
-      console.error("Cleanup error in CollectionPointsLayer:", e);
-    }
+      layers.forEach((l) => { if (map.getLayer(l)) map.removeLayer(l); });
+      sources.forEach((s) => { if (map.getSource(s)) map.removeSource(s); });
+    } catch {}
 
-    map.addSource(SOURCE_ID, { type: "geojson", data: geojson });
+    map.addSource(POLY_SOURCE, { type: "geojson", data: polyGeoJSON });
+    map.addSource(PT_SOURCE, { type: "geojson", data: ptGeoJSON });
 
-    // 1. SILO GLOW
+    // 1. Outer glow — large, very diffuse
     map.addLayer({
-      id: GLOW_ID,
+      id: GLOW_OUTER,
       type: "circle",
-      source: SOURCE_ID,
+      source: PT_SOURCE,
       paint: {
-        "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 2, 16, 12],
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 9, 8, 14, 40],
+        "circle-color": ["get", "color"],
+        "circle-blur": 1.8,
+        "circle-opacity": 0.18,
+      },
+    });
+
+    // 2. Mid glow
+    map.addLayer({
+      id: GLOW_MID,
+      type: "circle",
+      source: PT_SOURCE,
+      paint: {
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 9, 5, 14, 24],
         "circle-color": ["get", "color"],
         "circle-blur": 1.2,
         "circle-opacity": 0.4,
       },
     });
 
-    // 2. INDUSTRIAL SILO
+    // 3. Inner glow — sharp halo
     map.addLayer({
-      id: LAYER_ID,
+      id: GLOW_INNER,
+      type: "circle",
+      source: PT_SOURCE,
+      paint: {
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 9, 3, 14, 12],
+        "circle-color": ["get", "color"],
+        "circle-blur": 0.5,
+        "circle-opacity": 0.7,
+      },
+    });
+
+    // 4. Cylinder body (fill-extrusion)
+    map.addLayer({
+      id: CYLINDER_ID,
       type: "fill-extrusion",
-      source: SOURCE_ID,
+      source: POLY_SOURCE,
       paint: {
         "fill-extrusion-color": ["get", "color"],
         "fill-extrusion-height": ["get", "height"],
         "fill-extrusion-base": 0,
-        "fill-extrusion-opacity": 0.95,
+        "fill-extrusion-opacity": 0.92,
         "fill-extrusion-vertical-gradient": true,
       },
     });
 
+    // 5. Cylinder cap (white top)
     map.addLayer({
-      id: TOP_HIGHLIGHT_ID,
+      id: CAP_ID,
       type: "fill-extrusion",
-      source: SOURCE_ID,
+      source: POLY_SOURCE,
       paint: {
         "fill-extrusion-color": "#ffffff",
-        "fill-extrusion-height": ["+", ["get", "height"], 1],
+        "fill-extrusion-height": ["+", ["get", "height"], 1.5],
         "fill-extrusion-base": ["get", "height"],
-        "fill-extrusion-opacity": 0.9,
+        "fill-extrusion-opacity": 0.95,
       },
     });
 
+    // 6. Name label
     map.addLayer({
-      id: ICON_LAYER_ID,
+      id: LABEL_ID,
       type: "symbol",
-      source: SOURCE_ID,
+      source: PT_SOURCE,
+      minzoom: 10,
       layout: {
-        "icon-image": "farm",
-        "icon-size": 0.8,
-        "icon-allow-overlap": true,
-        "icon-ignore-placement": true,
-        "text-field": ["get", "name"],
-        "text-size": 10,
-        "text-offset": [0, 2],
+        "text-field": ["get", "id"],
+        "text-size": 9,
+        "text-offset": [0, 1.8],
         "text-anchor": "top",
-        "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+        "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
+        "text-allow-overlap": false,
       },
       paint: {
         "text-color": "#ffffff",
-        "text-halo-color": "rgba(0,0,0,0.8)",
+        "text-halo-color": "rgba(0,0,0,0.9)",
         "text-halo-width": 1,
-      }
+        "text-opacity": 0.7,
+      },
     });
 
-    map.on("mousemove", LAYER_ID, (e) => {
+    map.on("mousemove", CYLINDER_ID, (e) => {
       if (!e.features?.length) return;
       map.getCanvas().style.cursor = "pointer";
       const props = e.features[0].properties as Record<string, unknown>;
       const pt = points.find((p) => p.id === props.id);
       if (pt) onHover?.(pt);
     });
-
-    map.on("mouseleave", LAYER_ID, () => {
+    map.on("mouseleave", CYLINDER_ID, () => {
       map.getCanvas().style.cursor = "";
       onHover?.(null);
     });
 
     return () => {
       try {
-        map.off("mousemove", LAYER_ID, () => {});
-        map.off("mouseleave", LAYER_ID, () => {});
-        if (map.getLayer(LAYER_ID)) map.removeLayer(LAYER_ID);
-        if (map.getLayer(GLOW_ID)) map.removeLayer(GLOW_ID);
-        if (map.getLayer(TOP_HIGHLIGHT_ID)) map.removeLayer(TOP_HIGHLIGHT_ID);
-        if (map.getLayer(ICON_LAYER_ID)) map.removeLayer(ICON_LAYER_ID);
-        if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
+        map.off("mousemove", CYLINDER_ID, () => {});
+        map.off("mouseleave", CYLINDER_ID, () => {});
+        layers.forEach((l) => { if (map.getLayer(l)) map.removeLayer(l); });
+        sources.forEach((s) => { if (map.getSource(s)) map.removeSource(s); });
       } catch {}
     };
   }, [map, points]);

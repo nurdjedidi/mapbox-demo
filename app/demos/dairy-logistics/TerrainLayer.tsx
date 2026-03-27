@@ -17,7 +17,7 @@ export function TerrainLayer() {
         });
       }
 
-      map.setTerrain({ source: "mapbox-dem", exaggeration: 2.0 });
+      map.setTerrain({ source: "mapbox-dem", exaggeration: 2.8 });
 
       if (!map.getLayer("sky")) {
         map.addLayer({
