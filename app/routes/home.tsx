@@ -45,7 +45,7 @@ const DEMOS = [
     borderColor: "border-climate-blue/25",
     iconColor: "text-climate-blue",
     city: "Vallée Soummam · Akbou",
-    badge: "Agro-Industrie",
+    badge: "Agri-Logistique",
   },
 ];
 
