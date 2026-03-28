@@ -36,6 +36,7 @@ const DEMOS = [
     city: "Casablanca",
     badge: "ClimaTech",
   },
+  /*
   {
     to: "/dairy-logistics",
     title: "Dairy Logistics 3D",
@@ -47,6 +48,7 @@ const DEMOS = [
     city: "Vallée Soummam · Akbou",
     badge: "Agro-Industrie",
   },
+  */
 ];
 
 export function meta() {
