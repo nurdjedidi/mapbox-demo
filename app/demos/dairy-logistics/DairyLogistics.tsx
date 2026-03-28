@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { MapContainer } from "~/components/map/MapContainer";
 import { DemoLayout } from "~/components/layout/DemoLayout";
 import { SidePanel } from "~/components/layout/SidePanel";
@@ -25,9 +25,9 @@ export function DairyLogistics() {
 
   const { routes, loading } = useFleetRoutes(tankers, HUB_COORDS);
 
-  // Extract coords map for TankersLayer, and route data for side panel
-  const realRoutes = new Map(
-    Array.from(routes.entries()).map(([id, r]) => [id, r.coords])
+  const realRoutes = useMemo(
+    () => new Map(Array.from(routes.entries()).map(([id, r]) => [id, r.coords])),
+    [routes]
   );
   const selectedRoute = selectedTankerId ? routes.get(selectedTankerId) ?? null : null;
   const selectedTanker = tankers.find((t) => t.id === selectedTankerId) ?? null;

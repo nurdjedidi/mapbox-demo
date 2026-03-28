@@ -59,7 +59,6 @@ export function meta() {
 export default function Home() {
   return (
     <div className="min-h-screen bg-dark-bg flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
-      {/* Background gradient effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-eco-green/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-climate-blue/5 rounded-full blur-3xl" />
