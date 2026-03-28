@@ -101,11 +101,10 @@ export function DairyStatsPanel({
           </div>
         </div>
 
-        {/* Route to hub */}
         <div className="glass-panel p-3">
           <div className="flex items-center gap-2 mb-2">
             <Truck size={12} className="text-white/30" />
-            <span className="text-[10px] text-white/40 uppercase tracking-wider">Trajet → Hub Akbou</span>
+            <span className="text-[10px] text-white/40 uppercase tracking-wider">Trajet → Hub Central</span>
           </div>
           {routesLoading ? (
             <div className="flex items-center gap-2">
@@ -132,10 +131,9 @@ export function DairyStatsPanel({
           ) : (
             <span className="text-white/30 text-xs">Route non disponible</span>
           )}
-          <div className="mt-2 text-[10px] text-white/25">→ Soummam · Akbou Hub</div>
+          <div className="mt-2 text-[10px] text-white/25">→ Hub Central</div>
         </div>
 
-        {/* Back to fleet */}
         <button
           onClick={() => onSelectTanker(null)}
           className="glass-panel p-3 flex items-center gap-2 text-xs text-white/40 hover:text-white/70 transition-colors w-full text-left"
@@ -153,7 +151,6 @@ export function DairyStatsPanel({
 
   return (
     <div className="flex flex-col gap-3">
-      {/* KPIs */}
       <div className="glass-panel p-4 border-eco-green/30 bg-gradient-to-br from-eco-green/5 to-transparent">
         <div className="flex items-center gap-2 mb-3">
           <Milk size={14} className="text-eco-green" />

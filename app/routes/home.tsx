@@ -36,19 +36,17 @@ const DEMOS = [
     city: "Casablanca",
     badge: "ClimaTech",
   },
-  /*
   {
     to: "/dairy-logistics",
     title: "Dairy Logistics 3D",
-    description: "Collecte laitière montagnarde en 3D. 15 centres de collecte, 8 citernes animées, terrain Kabyle RGB et cold chain en temps réel.",
+    description: "Collecte laitière montagnarde en 3D. 15 centres de collecte, 8 citernes animées, terrain RGB et cold chain en temps réel.",
     icon: Milk,
     gradient: "from-climate-blue/15 to-agri-amber/10",
     borderColor: "border-climate-blue/25",
     iconColor: "text-climate-blue",
-    city: "Vallée Soummam · Akbou",
+    city: "Région Montagneuse",
     badge: "Agro-Industrie",
   },
-  */
 ];
 
 export function meta() {

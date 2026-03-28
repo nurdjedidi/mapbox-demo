@@ -63,7 +63,7 @@ export function DairyLogistics() {
         />
       </MapContainer>
 
-      <SidePanel title="Dairy Logistics — Soummam">
+      <SidePanel title="Dairy Logistics">
         <DairyStatsPanel
           stats={dairyData.stats}
           points={points}

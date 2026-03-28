@@ -64,7 +64,7 @@ export function AkbouHub({ coordinates, currentVolume, capacity }: AkbouHubProps
         .setHTML(`
           <div style="padding:10px 14px;background:#0f1a2e;border:1px solid rgba(34,197,94,0.3);border-radius:10px;min-width:180px;">
             <div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Usine principale</div>
-            <div style="font-size:14px;color:#fff;font-weight:600;margin-bottom:8px;">Soummam · Akbou Hub</div>
+            <div style="font-size:14px;color:#fff;font-weight:600;margin-bottom:8px;">Hub Central</div>
             <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.5);">
               <span>Capacité</span><span style="color:#22C55E;font-family:monospace;font-weight:700;">${capacity.toLocaleString("fr-FR")} L</span>
             </div>

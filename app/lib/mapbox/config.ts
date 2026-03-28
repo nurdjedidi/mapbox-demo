@@ -23,12 +23,12 @@ export type CityKey = "dubai" | "casablanca" | "agadir" | "akbou";
 
 export const CITIES: Record<CityKey, CityConfig> = {
   akbou: {
-    name: "Akbou",
+    name: "Région Montagneuse",
     center: [4.5397, 36.4554],
     zoom: 10.2,
     pitch: 62,
     bearing: 10,
-    description: "Vallée de la Soummam — collecte laitière montagnes kabyles",
+    description: "Collecte laitière — réseau de citernes en zone montagneuse",
   },
   agadir: {
     name: "Agadir",
