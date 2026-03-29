@@ -21,10 +21,7 @@ export function CleanMapLayer() {
           id.includes("road-label") ||
           id.includes("street-label") ||
           id.includes("poi-label") ||
-          id.includes("settlement") ||
-          id.includes("place-label") ||
           id.includes("transit") ||
-          id.includes("airport-label") ||
           id.includes("ferry-aerialway-label");
         if (shouldHide) {
           try {

@@ -17,7 +17,6 @@ export function tempColor(temp: number): string {
   return "#FF1744";
 }
 
-/** Safe position + bearing at fraction p (0→1) along coords. Never throws. */
 function posAt(coords: [number, number][], p: number): { pos: [number, number]; bearing: number } {
   if (!coords || coords.length < 2) return { pos: coords?.[0] ?? [0, 0], bearing: 0 };
   try {
@@ -79,7 +78,6 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
   const lastTimeRef   = useRef<number>(0);
   const frameRef      = useRef<number>(0);
 
-  // Live refs – read inside rAF/effects without stale closure issues
   const isPlayingRef  = useRef(isPlaying);
   const realRoutesRef = useRef(realRoutes);
   const selectedIdRef = useRef(selectedTankerId);
@@ -90,7 +88,6 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
   useEffect(() => { selectedIdRef.current = selectedTankerId; }, [selectedTankerId]);
   useEffect(() => { onSelectRef.current   = onSelectTanker; }, [onSelectTanker]);
 
-  // ── When isPlaying goes false, reset trucks to their origins ─────────────
   useEffect(() => {
     if (isPlaying || !readyRef.current) return;
     tankers.forEach((t, i) => {
@@ -101,7 +98,6 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
     });
   }, [isPlaying, tankers]);
 
-  // ── Create markers + map layers (once, when map is ready) ────────────────
   useEffect(() => {
     if (!map || tankers.length === 0) return;
     let cancelled = false;
@@ -119,7 +115,6 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
           try { if (map.getSource(id)) map.removeSource(id); } catch {}
         }
 
-        // Use real route if already loaded, else fallback
         const coords = realRoutesRef.current.get(t.id) ?? t.route;
 
         map.addSource(routeId, {
@@ -157,7 +152,7 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
           </div>`);
 
         const marker = new mapboxgl.Marker({ element: el, rotationAlignment: "map", pitchAlignment: "map" })
-          .setLngLat(coords[0])   // always at collection point (start of route)
+          .setLngLat(coords[0])   
           .setPopup(popup)
           .addTo(map);
 
@@ -186,7 +181,6 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, tankers]);
 
-  // ── When real routes arrive, update the dashed line sources ──────────────
   useEffect(() => {
     if (!map || !readyRef.current || realRoutes.size === 0) return;
     tankers.forEach((t, i) => {
@@ -195,7 +189,6 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
       try {
         (map.getSource(`tanker-route-${t.id}`) as mapboxgl.GeoJSONSource)
           ?.setData({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: coords } });
-        // If not playing, keep marker at start of real route (collection point)
         if (!isPlayingRef.current) {
           markersRef.current[i]?.setLngLat(coords[0]);
         }
@@ -203,7 +196,6 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
     });
   }, [map, realRoutes, tankers]);
 
-  // ── Pan to selected truck ─────────────────────────────────────────────────
   useEffect(() => {
     if (!map || !selectedTankerId) return;
     const i = tankers.findIndex((t) => t.id === selectedTankerId);
@@ -213,7 +205,6 @@ export function TankersLayer({ tankers, isPlaying, selectedTankerId, onSelectTan
     map.flyTo({ center: pos, zoom: 11.5, pitch: 55, duration: 1200, essential: true });
   }, [map, selectedTankerId, tankers]);
 
-  // ── Single animation loop (always running, only moves trucks when playing) ─
   useEffect(() => {
     if (!map) return;
     const m = map;

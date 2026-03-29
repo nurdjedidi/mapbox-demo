@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Sprout, Leaf, Wind, Milk, ArrowRight } from "lucide-react";
+import { Sprout, Leaf, Wind, Milk, Car, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const DEMOS = [
@@ -47,11 +47,22 @@ const DEMOS = [
     city: "Région Montagneuse",
     badge: "Agro-Industrie",
   },
+  {
+    to: "/car-rental",
+    title: "Location Automobile",
+    description: "Suivi flotte en temps réel sur Alger. 16 véhicules, zones golf & premium, garages, alertes maintenance et KPIs location.",
+    icon: Car,
+    gradient: "from-[#3B82F6]/15 to-[#A855F7]/10",
+    borderColor: "border-[#3B82F6]/25",
+    iconColor: "text-[#3B82F6]",
+    city: "Alger",
+    badge: "Mobilité",
+  },
 ];
 
 export function meta() {
   return [
-    { title: "ImpactMap — AgriTech · Green Fleet · Climate Monitor · Dairy Logistics" },
+    { title: "ImpactMap — AgriTech · Green Fleet · Climate Monitor · Dairy Logistics · Location Auto" },
     { name: "description", content: "Démos cartographiques orientées impact environnemental" },
   ];
 }

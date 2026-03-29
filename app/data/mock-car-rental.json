@@ -1,0 +1,192 @@
+{
+  "stats": {
+    "total_vehicles": 16,
+    "available": 5,
+    "rented": 6,
+    "maintenance": 3,
+    "reserved": 2,
+    "utilization_rate_pct": 56,
+    "daily_revenue_dzd": 485000,
+    "avg_rental_duration_h": 4.2,
+    "monthly_revenue_dzd": 12400000,
+    "active_clients": 6
+  },
+  "garages": [
+    { "id": "G-01", "name": "Garage Central Hydra",    "coordinates": [3.0370, 36.7428], "capacity": 8, "available_spots": 3 },
+    { "id": "G-02", "name": "Atelier Hussein Dey",     "coordinates": [3.1080, 36.7330], "capacity": 6, "available_spots": 1 },
+    { "id": "G-03", "name": "Hub Aéroport",            "coordinates": [3.2120, 36.6960], "capacity": 10,"available_spots": 5 }
+  ],
+  "premiumZones": [
+    {
+      "id": "Z-GOLF-01",
+      "name": "Royal Golf Club d'Alger",
+      "type": "golf",
+      "coordinates": [
+        [2.9980, 36.7540], [3.0120, 36.7560], [3.0180, 36.7490],
+        [3.0060, 36.7450], [2.9970, 36.7480], [2.9980, 36.7540]
+      ]
+    },
+    {
+      "id": "Z-GOLF-02",
+      "name": "Golf Club de Souidania",
+      "type": "golf",
+      "coordinates": [
+        [2.9520, 36.7810], [2.9660, 36.7840], [2.9700, 36.7760],
+        [2.9570, 36.7730], [2.9520, 36.7810]
+      ]
+    },
+    {
+      "id": "Z-VIP-01",
+      "name": "Club des Pins — Zone Résidentielle",
+      "type": "premium",
+      "coordinates": [
+        [2.9120, 36.7640], [2.9280, 36.7720], [2.9360, 36.7660],
+        [2.9220, 36.7570], [2.9120, 36.7640]
+      ]
+    },
+    {
+      "id": "Z-AIRPORT",
+      "name": "Aéroport Houari Boumédiène",
+      "type": "airport",
+      "coordinates": [
+        [3.1960, 36.6860], [3.2340, 36.6860], [3.2340, 36.7020],
+        [3.1960, 36.7020], [3.1960, 36.6860]
+      ]
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "VH-01", "plate": "16 1042-16", "model": "Toyota RAV4",      "type": "suv",     "status": "available",
+      "client": null, "fuel_pct": 92, "mileage_km": 28400,
+      "coordinates": [3.0370, 36.7428], "returnTime": null,
+      "waypoints": null
+    },
+    {
+      "id": "VH-02", "plate": "16 2218-16", "model": "Hyundai Tucson",   "type": "suv",     "status": "available",
+      "client": null, "fuel_pct": 78, "mileage_km": 41200,
+      "coordinates": [3.2120, 36.6960], "returnTime": null,
+      "waypoints": null
+    },
+    {
+      "id": "VH-03", "plate": "16 3301-16", "model": "Renault Symbol",   "type": "berline", "status": "available",
+      "client": null, "fuel_pct": 65, "mileage_km": 62100,
+      "coordinates": [3.0597, 36.7389], "returnTime": null,
+      "waypoints": null
+    },
+    {
+      "id": "VH-04", "plate": "16 4412-16", "model": "Dacia Logan",      "type": "citadine","status": "available",
+      "client": null, "fuel_pct": 88, "mileage_km": 18900,
+      "coordinates": [2.9680, 36.7620], "returnTime": null,
+      "waypoints": null
+    },
+    {
+      "id": "VH-05", "plate": "16 5530-16", "model": "Peugeot 208",      "type": "citadine","status": "available",
+      "client": null, "fuel_pct": 55, "mileage_km": 33700,
+      "coordinates": [3.1080, 36.7330], "returnTime": null,
+      "waypoints": null
+    },
+    {
+      "id": "VH-06", "plate": "16 6641-16", "model": "Toyota Land Cruiser","type": "suv",  "status": "rented",
+      "client": "Entreprise Sonatrach", "fuel_pct": 71, "mileage_km": 55800,
+      "coordinates": [3.2120, 36.6960], "returnTime": "19:00",
+      "waypoints": [
+        [3.2120, 36.6960], [3.1800, 36.7100], [3.1400, 36.7200],
+        [3.0900, 36.7300], [3.0400, 36.7450], [2.9800, 36.7600],
+        [2.9280, 36.7720], [2.9200, 36.7660]
+      ]
+    },
+    {
+      "id": "VH-07", "plate": "16 7782-16", "model": "Hyundai Elantra",  "type": "berline", "status": "rented",
+      "client": "M. Kaci Amar", "fuel_pct": 44, "mileage_km": 79200,
+      "coordinates": [3.0597, 36.7389], "returnTime": "17:30",
+      "waypoints": [
+        [3.0597, 36.7389], [3.0500, 36.7420], [3.0400, 36.7450],
+        [3.0300, 36.7500], [3.0200, 36.7520], [3.0100, 36.7530],
+        [3.0050, 36.7550], [3.0000, 36.7520]
+      ]
+    },
+    {
+      "id": "VH-08", "plate": "16 8803-16", "model": "Renault Clio",     "type": "citadine","status": "rented",
+      "client": "Mme Boudiaf Sara", "fuel_pct": 82, "mileage_km": 24500,
+      "coordinates": [3.0880, 36.7280], "returnTime": "16:00",
+      "waypoints": [
+        [3.0880, 36.7280], [3.0750, 36.7340], [3.0620, 36.7390],
+        [3.0500, 36.7430], [3.0380, 36.7490], [3.0250, 36.7540],
+        [3.0120, 36.7580], [3.0000, 36.7620], [2.9850, 36.7660],
+        [2.9680, 36.7710]
+      ]
+    },
+    {
+      "id": "VH-09", "plate": "16 9914-16", "model": "Kia Sportage",     "type": "suv",     "status": "rented",
+      "client": "Ambassade France", "fuel_pct": 67, "mileage_km": 38900,
+      "coordinates": [3.0230, 36.7630], "returnTime": "20:00",
+      "waypoints": [
+        [3.0230, 36.7630], [3.0300, 36.7570], [3.0380, 36.7500],
+        [3.0480, 36.7440], [3.0580, 36.7380], [3.0720, 36.7310],
+        [3.0850, 36.7270], [3.1000, 36.7250], [3.1150, 36.7280],
+        [3.1300, 36.7310]
+      ]
+    },
+    {
+      "id": "VH-10", "plate": "16 1025-16", "model": "Toyota HiAce",     "type": "minivan", "status": "rented",
+      "client": "Groupe Cevital", "fuel_pct": 59, "mileage_km": 91400,
+      "coordinates": [2.9680, 36.7620], "returnTime": "18:30",
+      "waypoints": [
+        [2.9680, 36.7620], [2.9900, 36.7560], [3.0150, 36.7510],
+        [3.0400, 36.7450], [3.0650, 36.7390], [3.0900, 36.7320],
+        [3.1200, 36.7270], [3.1500, 36.7230], [3.1800, 36.7200],
+        [3.2100, 36.7120], [3.2400, 36.7050]
+      ]
+    },
+    {
+      "id": "VH-11", "plate": "16 1136-16", "model": "Dacia Duster",     "type": "suv",     "status": "rented",
+      "client": "M. Mebarki Hicham", "fuel_pct": 76, "mileage_km": 47300,
+      "coordinates": [2.9750, 36.7330], "returnTime": "15:45",
+      "waypoints": [
+        [2.9750, 36.7330], [2.9900, 36.7380], [3.0050, 36.7400],
+        [3.0200, 36.7410], [3.0350, 36.7410], [3.0500, 36.7400],
+        [3.0650, 36.7380], [3.0800, 36.7360]
+      ]
+    },
+    {
+      "id": "VH-12", "plate": "16 1247-16", "model": "Hyundai Accent",   "type": "berline", "status": "maintenance",
+      "client": null, "fuel_pct": 30, "mileage_km": 112000,
+      "coordinates": [3.0620, 36.7350], "returnTime": null,
+      "issue": "Vidange + freins",
+      "waypoints": [
+        [3.0620, 36.7350], [3.0550, 36.7380], [3.0470, 36.7400],
+        [3.0420, 36.7420], [3.0370, 36.7428]
+      ]
+    },
+    {
+      "id": "VH-13", "plate": "16 1358-16", "model": "Renault Logan",    "type": "berline", "status": "maintenance",
+      "client": null, "fuel_pct": 15, "mileage_km": 98700,
+      "coordinates": [3.0370, 36.7428], "returnTime": null,
+      "issue": "Pneu crevé — immobilisé",
+      "waypoints": null
+    },
+    {
+      "id": "VH-14", "plate": "16 1469-16", "model": "Peugeot 301",      "type": "berline", "status": "maintenance",
+      "client": null, "fuel_pct": 22, "mileage_km": 135600,
+      "coordinates": [3.1050, 36.7310], "returnTime": null,
+      "issue": "Moteur — en route garage",
+      "waypoints": [
+        [3.1050, 36.7310], [3.0920, 36.7320], [3.0800, 36.7330],
+        [3.0650, 36.7355], [3.0520, 36.7380], [3.0400, 36.7410],
+        [3.0370, 36.7428]
+      ]
+    },
+    {
+      "id": "VH-15", "plate": "16 1570-16", "model": "Toyota Yaris",     "type": "citadine","status": "reserved",
+      "client": "Mme Larbi Nadia", "fuel_pct": 96, "mileage_km": 8200,
+      "coordinates": [3.2120, 36.6960], "returnTime": "Pickup 14:00",
+      "waypoints": null
+    },
+    {
+      "id": "VH-16", "plate": "16 1681-16", "model": "Hyundai i20",      "type": "citadine","status": "reserved",
+      "client": "M. Taleb Karim", "fuel_pct": 89, "mileage_km": 15100,
+      "coordinates": [3.0370, 36.7428], "returnTime": "Pickup 16:30",
+      "waypoints": null
+    }
+  ]
+}

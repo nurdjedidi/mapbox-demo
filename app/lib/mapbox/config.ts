@@ -19,7 +19,7 @@ export interface CityConfig {
   description: string;
 }
 
-export type CityKey = "dubai" | "casablanca" | "agadir" | "akbou";
+export type CityKey = "dubai" | "casablanca" | "agadir" | "akbou" | "alger";
 
 export const CITIES: Record<CityKey, CityConfig> = {
   akbou: {
@@ -53,6 +53,14 @@ export const CITIES: Record<CityKey, CityConfig> = {
     pitch: 60,
     bearing: 0,
     description: "Mix ancien & moderne, Mosquee Hassan II",
+  },
+  alger: {
+    name: "Alger",
+    center: [3.0420, 36.7440],
+    zoom: 12.8,
+    pitch: 52,
+    bearing: -10,
+    description: "Capitale — flotte de location, zones premium, aéroport",
   },
 };
 
